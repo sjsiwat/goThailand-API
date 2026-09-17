@@ -1,20 +1,21 @@
-### GO-THAILAND Backend
+# GO-THAILAND Backend — Team 8
 
-### MAIN API PATH
+Backend API สำหรับโปรเจกต์ **GO-THAILAND**
 
+## Main API Path
+
+```
 https://gothailand-api.onrender.com
+```
 
-### routes API
+## Routes API
 
-## https://gothailand-api.onrender.com/api/accommodations
-
-## https://gothailand-api.onrender.com/api/cars
-
-## https://gothailand-api.onrender.com/api/guides
-
-## https://gothailand-api.onrender.com/api/users
-
-Backend API สำหรับโปรเจกต์ GO-THAILAND — Team 8
+```
+https://gothailand-api.onrender.com/api/accommodations
+https://gothailand-api.onrender.com/api/cars
+https://gothailand-api.onrender.com/api/guides
+https://gothailand-api.onrender.com/api/users
+```
 
 Backend นี้ใช้สำหรับจัดการข้อมูลของ:
 
@@ -23,59 +24,55 @@ Backend นี้ใช้สำหรับจัดการข้อมูล
 - 🧑‍🏫 Guide
 - 👤 User
 
-⸻
+---
 
-1. Tech Stack
+## Tech Stack
 
 โปรเจกต์นี้ใช้:
 
-- Node.js — Runtime สำหรับรัน JavaScript ฝั่ง Backend
-- Express.js — สร้าง REST API
-- MongoDB — Database
-- Mongoose — เชื่อม Node.js กับ MongoDB
-- CORS — อนุญาตให้ Frontend เรียก Backend
-- dotenv — อ่านค่าจาก .env
+- **Node.js** — Runtime สำหรับรัน JavaScript ฝั่ง Backend
+- **Express.js** — สร้าง REST API
+- **MongoDB** — Database
+- **Mongoose** — เชื่อม Node.js กับ MongoDB
+- **CORS** — อนุญาตให้ Frontend เรียก Backend
+- **dotenv** — อ่านค่าจาก `.env`
 
-⸻
+---
 
-2. Project Structure
+## Project Structure
 
-โครงสร้างหลักของ Backend:
-
+```
 Team8-Backend/
 │
 ├── src/
-│ │
-│ ├── server.js
-│ │
-│ ├── config/
-│ │ └── db.js
-│ │
-│ ├── models/
-│ │ ├── Accommodation.js
-│ │ ├── Car.js
-│ │ ├── Guide.js
-│ │ └── User.js
-│ │
-│ └── routes/
-│ ├── accommodation.routes.js
-│ ├── car.routes.js
-│ ├── guide.routes.js
-│ └── user.routes.js
+│   ├── server.js
+│   │
+│   ├── config/
+│   │   └── db.js
+│   │
+│   ├── models/
+│   │   ├── Accommodation.js
+│   │   ├── Car.js
+│   │   ├── Guide.js
+│   │   └── User.js
+│   │
+│   └── routes/
+│       ├── accommodation.routes.js
+│       ├── car.routes.js
+│       ├── guide.routes.js
+│       └── user.routes.js
 │
 ├── .env
 ├── .env.example
 ├── .gitignore
 ├── package.json
 └── package-lock.json
+```
 
-หน้าที่ของแต่ละ Folder
+### หน้าที่ของแต่ละ Folder
 
-src/server.js
-
-เป็นไฟล์หลักของ Backend
-
-ทำหน้าที่:
+**`src/server.js`**
+เป็นไฟล์หลักของ Backend ทำหน้าที่:
 
 - สร้าง Express server
 - เปิด CORS
@@ -84,809 +81,659 @@ src/server.js
 - เชื่อม MongoDB
 - เปิด Port
 
-ไม่ควรแก้ไฟล์นี้โดยไม่จำเป็น
+> ⚠️ ไม่ควรแก้ไฟล์นี้โดยไม่จำเป็น
 
-⸻
+**`src/config/db.js`**
+ใช้สำหรับเชื่อมต่อ MongoDB — ไม่ต้องแก้ไฟล์นี้
 
-src/config/db.js
+**`src/models/`**
+เก็บ Model ของแต่ละ resource เช่น
 
-ใช้สำหรับเชื่อมต่อ MongoDB
-
-ไม่ต้องแก้ไฟล์นี้
-
-⸻
-
-src/models/
-
-เก็บ Model ของแต่ละ resource
-
-ตัวอย่าง:
-
-models/
-├── Accommodation.js
-├── Car.js
-├── Guide.js
-└── User.js
-
-Model มีหน้าที่กำหนดว่า Document ใน MongoDB จะมีข้อมูลอะไรบ้าง
-
-ตัวอย่าง:
-
+```js
 const accommodationSchema = new mongoose.Schema({
-name: String,
-location: String,
-price: Number
+  name: String,
+  location: String,
+  price: Number,
 });
+```
 
-⸻
+**`src/routes/`**
+เก็บ API Routes ของแต่ละ resource กำหนดว่า `GET` `POST` `PATCH` `DELETE` ทำงานอย่างไร
 
-src/routes/
+---
 
-เก็บ API Routes ของแต่ละ resource
+## Clone Repository
 
-ตัวอย่าง:
+เปิด Terminal ใน VS Code หรือ Terminal ของเครื่อง แล้วไปยัง folder ที่ต้องการเก็บ project:
 
-routes/
-├── accommodation.routes.js
-├── car.routes.js
-├── guide.routes.js
-└── user.routes.js
-
-ใน Route จะกำหนดว่า:
-
-GET
-POST
-PATCH
-DELETE
-
-ทำงานอย่างไร
-
-⸻
-
-3. Clone Repository
-
-เปิด Terminal ใน VS Code หรือ Terminal ของเครื่อง
-
-ไปยัง folder ที่ต้องการเก็บ project เช่น:
-
+```bash
 cd ~/Documents/GitHub/JSD13
+```
 
-จากนั้น Clone:
+Clone repository:
 
+```bash
 git clone <BACKEND_REPOSITORY_URL>
+```
 
 ตัวอย่าง:
 
+```bash
 git clone https://github.com/xxxxx/Team8-Backend.git
+```
 
 เข้า folder:
 
+```bash
 cd Team8-Backend
+```
 
 ตรวจสอบว่าอยู่ใน project ถูกต้อง:
 
+```bash
 pwd
-
-และ:
-
 ls
+```
 
 ควรเห็นประมาณ:
 
+```
 README.md
 package.json
 package-lock.json
 src
 .env.example
 .gitignore
+```
 
-⸻
+---
 
-4. Install Dependencies
+## Install Dependencies
 
-หลังจาก Clone แล้ว ต้องติดตั้ง packages ก่อน
+หลังจาก Clone แล้ว ต้องติดตั้ง packages ก่อน:
 
-รัน:
-
+```bash
 npm install
+```
 
-คำสั่งนี้จะอ่าน package.json แล้วติดตั้ง dependencies ให้
+คำสั่งนี้จะอ่าน `package.json` แล้วติดตั้ง dependencies ให้ หลังจากติดตั้งเสร็จควรมี `node_modules/`
 
-หลังจากติดตั้งเสร็จควรมี:
+> ไม่ต้อง commit `node_modules` ขึ้น GitHub เพราะมีอยู่ใน `.gitignore` แล้ว
 
-node_modules/
+---
 
-ไม่ต้อง commit node_modules ขึ้น GitHub
+## ตั้งค่า .env
 
-เพราะมีอยู่ใน .gitignore
+ไฟล์ `.env` ใช้เก็บค่าที่ไม่ควรใส่ใน GitHub เช่น MongoDB connection string
 
-⸻
+ใน repository จะมีไฟล์ `.env.example` ตัวอย่าง:
 
-5. ตั้งค่า .env
-
-ไฟล์ .env ใช้เก็บค่าที่ไม่ควรใส่ใน GitHub เช่น MongoDB connection string
-
-ใน repository จะมีไฟล์:
-
-.env.example
-
-ตัวอย่าง:
-
+```env
 PORT=5001
 MONGO_URI=your_mongodb_connection_string
+```
 
-ให้สร้าง .env จาก .env.example
+ให้สร้าง `.env` จาก `.env.example`:
 
+```bash
 cp .env.example .env
+```
 
-จากนั้นเปิด:
+จากนั้นเปิด `.env` แล้วใส่ค่า `MONGO_URI` ที่ได้รับจาก Team 8:
 
-.env
-
-แล้วใส่ค่า MONGO_URI ที่ได้รับจาก Team 8
-
-ตัวอย่าง:
-
+```env
 PORT=5001
 MONGO_URI=mongodb+srv://...
+```
 
-⚠️ สำคัญ
+> ⚠️ **สำคัญ**
+>
+> - ห้าม commit `.env` ขึ้น GitHub (`.env` ถูกใส่ไว้ใน `.gitignore` แล้ว)
+> - ห้ามทำ `git add .env`
+> - ห้ามส่ง MongoDB connection string ลง GitHub
 
-ห้าม commit .env ขึ้น GitHub
+---
 
-.env ถูกใส่ไว้ใน .gitignore แล้ว
+## Start Backend
 
-ห้ามทำ:
-
-git add .env
-
-ห้ามส่ง MongoDB connection string ลง GitHub
-
-⸻
-
-6. Start Backend
-
-ใช้คำสั่ง:
-
+```bash
 npm run dev
+```
 
 ถ้าทุกอย่างถูกต้อง จะเห็นประมาณ:
 
-Go THAILAND Server running on http://localhost:5001 ✅
-MongoDB connected
+```
+Go THAILAND Server running on http://localhost:5001
+✅ MongoDB connected
+```
 
-แปลว่า:
+แปลว่า Express ✅ MongoDB ✅ Backend ✅
 
-Express ✅
-MongoDB ✅
-Backend ✅
+---
 
-⸻
+## ทดสอบว่า Server ทำงาน
 
-7. ทดสอบว่า Server ทำงาน
+เปิด Browser หรือ Thunder Client ไปที่:
 
-เปิด Browser หรือ Thunder Client
-
-ไปที่:
-
+```
 http://localhost:5001/
+```
 
 ควรได้:
 
-{
-"message": "GO-THAILAND API is running"
-}
+```json
+{ "message": "GO-THAILAND API is running" }
+```
 
 ถ้าได้แบบนี้ แสดงว่า Backend ทำงานแล้ว
 
-⸻
+---
 
-8. ใช้ Thunder Client ทดสอบ API
+## ใช้ Thunder Client ทดสอบ API
 
-แนะนำให้ใช้ Thunder Client ใน VS Code
+แนะนำให้ใช้ **Thunder Client** ใน VS Code
 
-ติดตั้ง:
+**ติดตั้ง:**
 
 1. เปิด VS Code
 2. เปิด Extensions
 3. ค้นหา Thunder Client
 4. Install
 
-ใช้ Thunder Client เพื่อทดสอบ:
+ใช้ Thunder Client เพื่อทดสอบ `GET` `POST` `PATCH` `DELETE` โดยไม่ต้องใช้ Frontend
 
-GET
-POST
-PATCH
-DELETE
+---
 
-โดยไม่ต้องใช้ Frontend
+## Backend API Structure
 
-⸻
+REST API — Base URL:
 
-9. Backend API Structure
-
-Backend ใช้ REST API
-
-Base URL:
-
+```
 http://localhost:5001
+```
 
-Accommodation
+**Accommodation**
 
-POST /api/accommodations
-GET /api/accommodations
-PATCH /api/accommodations/:id
+```
+POST   /api/accommodations
+GET    /api/accommodations
+PATCH  /api/accommodations/:id
 DELETE /api/accommodations/:id
+```
 
-Car
+**Car**
 
-POST /api/cars
-GET /api/cars
-PATCH /api/cars/:id
+```
+POST   /api/cars
+GET    /api/cars
+PATCH  /api/cars/:id
 DELETE /api/cars/:id
+```
 
-Guide
+**Guide**
 
-POST /api/guides
-GET /api/guides
-PATCH /api/guides/:id
+```
+POST   /api/guides
+GET    /api/guides
+PATCH  /api/guides/:id
 DELETE /api/guides/:id
+```
 
-User
+**User**
 
-POST /api/users
-GET /api/users
-PATCH /api/users/:id
+```
+POST   /api/users
+GET    /api/users
+PATCH  /api/users/:id
 DELETE /api/users/:id
+```
 
-⸻
+---
 
-10. งานของแต่ละคน
+## งานของแต่ละคน
 
-แต่ละคนรับผิดชอบ Resource ของตัวเอง
+แต่ละคนรับผิดชอบ Resource ของตัวเอง:
 
-Resource Owner
-Accommodation Siwat
-Car Team Member A
-Guide Team Member B
-User Team Member C
+| Resource      | Owner         |
+| ------------- | ------------- |
+| Accommodation | Siwat         |
+| Car           | Team Member A |
+| Guide         | Team Member B |
+| User          | Team Member C |
 
 แต่ละคนต้องทำ:
 
-1. Model
-2. Routes
-3. POST
-4. GET
-5. PATCH
-6. DELETE
-7. Test API
-8. Add data to MongoDB
+- Model
+- Routes (POST, GET, PATCH, DELETE)
+- Test API
+- Add data to MongoDB
 
-⸻
+---
 
-11. ตัวอย่างงานของ Car
+## ตัวอย่างงานของ Car
 
 ถ้าคุณรับผิดชอบ Car ให้สร้าง:
 
+```
 src/
 ├── models/
-│ └── Car.js
+│   └── Car.js
 │
 └── routes/
-└── car.routes.js
+    └── car.routes.js
+```
 
-⸻
+### สร้าง Model
 
-12. สร้าง Model
+สร้างไฟล์ `src/models/Car.js`:
 
-สร้างไฟล์:
-
-src/models/Car.js
-
-ตัวอย่าง:
-
+```js
 import mongoose from "mongoose";
+
 const carSchema = new mongoose.Schema({
-brand: String,
-model: String,
-price: Number
+  brand: String,
+  model: String,
+  price: Number,
 });
+
 const Car = mongoose.model("Car", carSchema);
 export default Car;
+```
 
-หมายเหตุ: Field ของแต่ละ resource ให้กำหนดตามข้อมูลที่โปรเจกต์ต้องการจริง
+> หมายเหตุ: Field ของแต่ละ resource ให้กำหนดตามข้อมูลที่โปรเจกต์ต้องการจริง
 
-⸻
+### สร้าง Routes
 
-13. สร้าง Routes
+สร้างไฟล์ `src/routes/car.routes.js`:
 
-สร้าง:
-
-src/routes/car.routes.js
-
-ตัวอย่างโครงสร้าง:
-
+```js
 import express from "express";
 import Car from "../models/Car.js";
+
 const router = express.Router();
+
 // POST
 router.post("/", async (req, res) => {
-try {
-const car = await Car.create(req.body);
-res.status(201).json(car);
-} catch (error) {
-res.status(500).json({
-message: error.message
+  try {
+    const car = await Car.create(req.body);
+    res.status(201).json(car);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
-}
-});
+
 // GET
 router.get("/", async (req, res) => {
-try {
-const cars = await Car.find();
-res.json(cars);
-} catch (error) {
-res.status(500).json({
-message: error.message
+  try {
+    const cars = await Car.find();
+    res.json(cars);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
-}
-});
+
 // PATCH
 router.patch("/:id", async (req, res) => {
-try {
-const car = await Car.findByIdAndUpdate(
-req.params.id,
-req.body,
-{ new: true }
-);
-if (!car) {
-return res.status(404).json({
-message: "Car not found"
+  try {
+    const car = await Car.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!car) {
+      return res.status(404).json({ message: "Car not found" });
+    }
+    res.json(car);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
-}
-res.json(car);
-} catch (error) {
-res.status(500).json({
-message: error.message
-});
-}
-});
+
 // DELETE
 router.delete("/:id", async (req, res) => {
-try {
-const car = await Car.findByIdAndDelete(
-req.params.id
-);
-if (!car) {
-return res.status(404).json({
-message: "Car not found"
+  try {
+    const car = await Car.findByIdAndDelete(req.params.id);
+    if (!car) {
+      return res.status(404).json({ message: "Car not found" });
+    }
+    res.json({ message: "Car deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
-}
-res.json({
-message: "Car deleted successfully"
-});
-} catch (error) {
-res.status(500).json({
-message: error.message
-});
-}
-});
+
 export default router;
+```
 
-⸻
+### Register Route ใน server.js
 
-14. Register Route ใน server.js
+หลังจากสร้าง Route แล้ว ต้องนำ Route มาเชื่อมกับ `server.js`:
 
-หลังจากสร้าง Route แล้ว ต้องนำ Route มาเชื่อมกับ server.js
-
-เพิ่ม:
-
+```js
 import carRoutes from "./routes/car.routes.js";
 
-และ:
-
 app.use("/api/cars", carRoutes);
+```
 
-ดังนั้น:
+ดังนั้น `/api/cars` จะเชื่อมกับ `src/routes/car.routes.js`
 
-/api/cars
+### ทำความเข้าใจ Route
 
-จะเชื่อมกับ:
+ถ้าใน `server.js` มี:
 
-src/routes/car.routes.js
-
-⸻
-
-15. ทำความเข้าใจ Route
-
-ถ้าใน server.js มี:
-
+```js
 app.use("/api/cars", carRoutes);
+```
 
-และใน car.routes.js มี:
+และใน `car.routes.js` มี:
 
+```js
 router.get("/");
+```
 
-URL ที่ได้คือ:
-
-GET /api/cars
+URL ที่ได้คือ `GET /api/cars`
 
 ถ้ามี:
 
+```js
 router.get("/:id");
+```
 
-URL จะเป็น:
+URL จะเป็น `GET /api/cars/:id` เช่น `GET /api/cars/68abc123`
 
-GET /api/cars/:id
+---
 
-ตัวอย่าง:
+## ทดสอบ POST
 
-GET /api/cars/68abc123
+เปิด Thunder Client → เลือก **POST** → URL:
 
-⸻
-
-16. ทดสอบ POST
-
-เปิด Thunder Client
-
-เลือก:
-
-POST
-
-URL:
-
+```
 http://localhost:5001/api/cars
+```
 
-เลือก:
+เลือก Body → JSON:
 
-Body
-→ JSON
-
-ตัวอย่าง:
-
+```json
 {
-"brand": "Toyota",
-"model": "Yaris",
-"price": 1200
+  "brand": "Toyota",
+  "model": "Yaris",
+  "price": 1200
 }
+```
 
-กด:
+กด Send — ถ้าสำเร็จ API จะคืนข้อมูลที่ถูกสร้างขึ้นมา พร้อม `_id`:
 
-Send
-
-ถ้าสำเร็จ API จะคืนข้อมูลที่ถูกสร้างขึ้นมา พร้อม \_id
-
-ตัวอย่าง:
-
+```json
 {
-"\_id": "68abc123",
-"brand": "Toyota",
-"model": "Yaris",
-"price": 1200,
-"\_\_v": 0
+  "_id": "68abc123",
+  "brand": "Toyota",
+  "model": "Yaris",
+  "price": 1200,
+  "__v": 0
 }
+```
 
-⸻
+## ทดสอบ GET
 
-17. ทดสอบ GET
+เลือก **GET** → URL:
 
-เลือก:
-
-GET
-
-URL:
-
+```
 http://localhost:5001/api/cars
+```
 
-กด:
+กด Send — จะได้ข้อมูลทั้งหมด:
 
-Send
-
-จะได้ข้อมูลทั้งหมด:
-
+```json
 [
-{
-"_id": "68abc123",
-"brand": "Toyota",
-"model": "Yaris",
-"price": 1200
-}
+  {
+    "_id": "68abc123",
+    "brand": "Toyota",
+    "model": "Yaris",
+    "price": 1200
+  }
 ]
+```
 
-⸻
+## ทดสอบ PATCH
 
-18. ทดสอบ PATCH
+Copy `_id` ของข้อมูลที่ต้องการแก้ เช่น `68abc123`
 
-Copy \_id ของข้อมูลที่ต้องการแก้
+เลือก **PATCH** → URL:
 
-ตัวอย่าง:
-
-68abc123
-
-เลือก:
-
-PATCH
-
-URL:
-
+```
 http://localhost:5001/api/cars/68abc123
+```
 
 Body:
 
-{
-"price": 1500
-}
+```json
+{ "price": 1500 }
+```
 
-กด:
+กด Send — ข้อมูล `price` จะถูกเปลี่ยนจาก `1200` เป็น `1500`
 
-Send
+## ทดสอบ DELETE
 
-ข้อมูล price จะถูกเปลี่ยนจาก:
+เลือก **DELETE** → URL:
 
-1200
-
-เป็น:
-
-1500
-
-⸻
-
-19. ทดสอบ DELETE
-
-เลือก:
-
-DELETE
-
-URL:
-
+```
 http://localhost:5001/api/cars/68abc123
+```
 
-กด:
+กด Send — ข้อมูลนั้นจะถูกลบออกจาก MongoDB
 
-Send
+---
 
-ข้อมูลนั้นจะถูกลบออกจาก MongoDB
+## Git Workflow
 
-⸻
+แต่ละคนต้องสร้าง Branch ของตัวเอง — **อย่าทำงานตรงบน main**
 
-20. Git Workflow
+ตัวอย่าง:
 
-แต่ละคนต้องสร้าง Branch ของตัวเอง
-
-อย่าทำงานตรงบน main
-
-ตัวอย่าง Car:
-
+```bash
 git checkout -b feature/car-api
-
-Guide:
-
 git checkout -b feature/guide-api
-
-User:
-
 git checkout -b feature/user-api
+```
 
-⸻
-
-21. หลังทำงานเสร็จ
+### หลังทำงานเสร็จ
 
 ตรวจสอบไฟล์ที่เปลี่ยน:
 
+```bash
 git status
+```
 
-เพิ่มไฟล์:
+เพิ่มไฟล์และ commit:
 
+```bash
 git add .
-
-Commit:
-
 git commit -m "add car CRUD API"
+```
 
 Push:
 
+```bash
 git push -u origin feature/car-api
+```
 
-จากนั้นไปที่ GitHub และเปิด:
+จากนั้นไปที่ GitHub และเปิด **Pull Request** จาก `feature/car-api` เข้า `main`
 
-Pull Request
+---
 
-จาก:
-
-feature/car-api
-
-เข้า:
-
-main
-
-⸻
-
-22. ก่อนเปิด Pull Request
+## ก่อนเปิด Pull Request
 
 ตรวจสอบว่า:
 
-- Server start ได้
-- MongoDB connect ได้
-- POST ทำงาน
-- GET ทำงาน
-- PATCH ทำงาน
-- DELETE ทำงาน
-- Test ด้วย Thunder Client แล้ว
-- ข้อมูลถูกเพิ่ม/แก้ไข/ลบใน MongoDB ถูกต้อง
-- ไม่มี .env ใน commit
-- ไม่มี node_modules ใน commit
-- ทำงานอยู่บน branch ของตัวเอง
+- [ ] Server start ได้
+- [ ] MongoDB connect ได้
+- [ ] POST ทำงาน
+- [ ] GET ทำงาน
+- [ ] PATCH ทำงาน
+- [ ] DELETE ทำงาน
+- [ ] Test ด้วย Thunder Client แล้ว
+- [ ] ข้อมูลถูกเพิ่ม/แก้ไข/ลบใน MongoDB ถูกต้อง
+- [ ] ไม่มี `.env` ใน commit
+- [ ] ไม่มี `node_modules` ใน commit
+- [ ] ทำงานอยู่บน branch ของตัวเอง
 
-⸻
+---
 
-23. สิ่งที่ไม่ควรแก้
+## สิ่งที่ไม่ควรแก้
 
 ถ้าไม่ได้จำเป็น อย่าแก้:
 
-src/config/db.js
+- `src/config/db.js`
+- อย่าเปลี่ยน `MONGO_URI` ของทีม
 
-และอย่าเปลี่ยน:
+และ:
 
-MONGO_URI
-
-ของทีม
-
-ไม่ต้องสร้าง MongoDB database ใหม่เอง
-
-ไม่ต้องติดตั้ง Express/Mongoose ใหม่
-
-ไม่ต้องสร้าง Backend project ใหม่
+- ไม่ต้องสร้าง MongoDB database ใหม่เอง
+- ไม่ต้องติดตั้ง Express/Mongoose ใหม่
+- ไม่ต้องสร้าง Backend project ใหม่
 
 เพียง Clone repository นี้แล้วทำ Resource ของตัวเอง
 
-⸻
+---
 
-24. ถ้าเจอปัญหา
+## ถ้าเจอปัญหา
 
-Cannot GET /api/cars
+**`Cannot GET /api/cars`**
 
 ตรวจสอบว่า:
 
-1. มี car.routes.js
-2. มี router.get("/")
-3. มีการ import ใน server.js
-4. มี:
+- มี `car.routes.js`
+- มี `router.get("/")`
+- มีการ import ใน `server.js`
+- มี `app.use("/api/cars", carRoutes);`
 
-app.use("/api/cars", carRoutes);
+**MongoDB connection error**
 
-⸻
+ตรวจสอบ `.env` ว่ามี `MONGO_URI=...` และไม่มี typo
 
-MongoDB connection error
-
-ตรวจสอบ:
-
-.env
-
-ว่ามี:
-
-MONGO_URI=...
-
-และไม่มี typo
-
-⸻
-
-Cannot find module
+**`Cannot find module`**
 
 ลอง:
 
+```bash
 npm install
+```
 
-และตรวจสอบ path เช่น:
+และตรวจสอบ path เช่น `import Car from "../models/Car.js";`
 
-import Car from "../models/Car.js";
+**Port ถูกใช้งานอยู่**
 
-⸻
+ตรวจสอบว่าไม่มี Backend ตัวอื่นกำลังใช้ port `5001` — ปิด server เดิมก่อน หรือแจ้งทีมก่อนเปลี่ยน Port
 
-Port ถูกใช้งานอยู่
+---
 
-ตรวจสอบว่าไม่มี Backend ตัวอื่นกำลังใช้:
+## สรุป Workflow
 
-5001
+```
+Clone Repository
+        ↓
+   npm install
+        ↓
+    สร้าง .env
+        ↓
+  ใส่ MONGO_URI
+        ↓
+    npm run dev
+        ↓
+สร้าง Branch ของตัวเอง
+        ↓
+    สร้าง Model
+        ↓
+   สร้าง Routes
+        ↓
+     ทำ CRUD
+        ↓
+Test ด้วย Thunder Client
+        ↓
+   ตรวจ MongoDB
+        ↓
+      Commit
+        ↓
+       Push
+        ↓
+  Pull Request
+        ↓
+      Review
+        ↓
+   Merge เข้า main
+```
 
-ปิด server เดิมก่อน หรือแจ้งทีมก่อนเปลี่ยน Port
+---
 
-⸻
-
-25. สรุป Workflow
-
-ทุกคนทำตามขั้นตอนนี้:
-
-1. Clone Repository
-   ↓
-2. npm install
-   ↓
-3. สร้าง .env
-   ↓
-4. ใส่ MONGO_URI
-   ↓
-5. npm run dev
-   ↓
-6. สร้าง Branch ของตัวเอง
-   ↓
-7. สร้าง Model
-   ↓
-8. สร้าง Routes
-   ↓
-9. ทำ CRUD
-   ↓
-10. Test ด้วย Thunder Client
-    ↓
-11. ตรวจ MongoDB
-    ↓
-12. Commit
-    ↓
-13. Push
-    ↓
-14. Pull Request
-    ↓
-15. Review
-    ↓
-16. Merge เข้า main
-
-17. API Architecture
+## API Architecture
 
 ภาพรวมของระบบ:
 
-                 Frontend React
-                       │
-                       │ fetch()
-                       ▼
-              Express Backend
-                       │
-          ┌────────────┼────────────┐
-          │            │            │
-          ▼            ▼            ▼
-
-Accommodation Cars Guides
-Routes Routes Routes
-│ │ │
-▼ ▼ ▼
-Mongoose Mongoose Mongoose
-│ │ │
-└────────────┼────────────┘
-▼
-MongoDB
+```
+              Frontend React
+                    │
+                    │ fetch()
+                    ▼
+            Express Backend
+                    │
+      ┌─────────────┼─────────────┐
+      │             │             │
+      ▼             ▼             ▼
+Accommodation      Cars         Guides
+   Routes         Routes        Routes
+      │             │             │
+      ▼             ▼             ▼
+  Mongoose       Mongoose      Mongoose
+      │             │             │
+      └─────────────┼─────────────┘
+                     ▼
+                  MongoDB
+```
 
 แต่ละคนรับผิดชอบ Resource ของตัวเอง แต่ทุกคนใช้ Backend และ MongoDB ของ Team 8 ร่วมกัน
 
-### path api จะประมาณนี้
+API paths โดยรวม:
 
-GET /api/accommodations
+```
+GET  /api/accommodations
 POST /api/accommodations
 
-GET /api/cars
+GET  /api/cars
 POST /api/cars
 
-GET /api/guides
+GET  /api/guides
 POST /api/guides
 
-GET /api/users
+GET  /api/users
 POST /api/users
+```
 
-ตย. ชุดข้อมูลที่ทำไว้ {
-"name": "Siwat",
-"email": "siwat@example.com",
-"phone": "0912345678"
+ตัวอย่างชุดข้อมูลที่ทำไว้:
+
+```json
+{
+  "name": "Siwat",
+  "email": "siwat@example.com",
+  "phone": "0912345678"
 }
-แต่ละคนสามารถเพิ่มแก้ไข data schema ของตัวเองได้ใน models/xxxx ไฟล์ของแต่ละคน
-เช่น
-const carSchema = new mongoose.Schema({
-brand: String,
-model: String,
-price: Number,
-});
+```
 
-สามารถระบุเพิ่มหรือแก้ไข ให้เป็นข้อมูลแบบที่ต้องการได้
+แต่ละคนสามารถเพิ่ม/แก้ไข data schema ของตัวเองได้ใน `models/xxxx.js` ของแต่ละคน เช่น:
 
+```js
 const carSchema = new mongoose.Schema({
-brand: String,
-model: String,
-color: String,
-years: Number,
-transmition: String,
+  brand: String,
+  model: String,
+  price: Number,
 });
+```
+
+สามารถระบุเพิ่มหรือแก้ไข ให้เป็นข้อมูลแบบที่ต้องการได้ เช่น:
+
+```js
+const carSchema = new mongoose.Schema({
+  brand: String,
+  model: String,
+  color: String,
+  years: Number,
+  transmition: String,
+});
+```
