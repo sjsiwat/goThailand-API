@@ -42,7 +42,7 @@ function getDefaultRooms(id, name, basePrice, bedrooms = 1) {
 
 const defaultPolicies = {
   cancellation_policy: "Free cancellation up to 48 hours before check-in",
-  check_in_time: "15:00",
+  check_in_time: "13:00",
   check_out_time: "12:00",
 };
 
@@ -107,7 +107,7 @@ export const accommodations = [
     id: "siam-heritage-sanctuary",
     name: "The Siam Heritage Sanctuary",
     category: "Luxury Resort",
-    categories: ["Private Villa","Luxury Resort"],
+    categories: ["Private Villa", "Luxury Resort"],
     region: "central",
     city: "Bangkok",
     district: "Riverside",
@@ -119,56 +119,56 @@ export const accommodations = [
     basePrice: 12500,
     description: "Experience unparalleled luxury in the heart of Bangkok. The Siam Heritage Sanctuary offers a profound sense of place, blending deep-rooted Thai architectural traditions with exquisite contemporary comfort. Set amidst lush, manicured gardens along the historic Chao Phraya River, this exclusive retreat promises serenity and absolute privacy.",
     descriptionExtra: "Each villa is a masterpiece of design — teak interiors, towering vaulted ceilings and curated antiques. Step outside to your expansive private deck, where a personal infinity pool merges visually with the river beyond.",
-    facilities: ["Free High-Speed Wi-Fi","Private Infinity Pool","24/7 Butler Service","Holistic Spa","State-of-the-Art Gym","Fine Dining"],
-    specialOptions: ["Breakfast Included","Free Cancellation","Private Pool","Beachfront"],
+    facilities: ["Free High-Speed Wi-Fi", "Private Infinity Pool", "24/7 Butler Service", "Holistic Spa", "State-of-the-Art Gym", "Fine Dining"],
+    specialOptions: ["Breakfast Included", "Free Cancellation", "Private Pool", "Beachfront"],
     rooms: [
       {
-            "room_type_id": "rm-villa-01",
-            "name": "Royal Riverside Villa",
-            "bed_type": "1 King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 1
-            },
-            "price_per_night": 12500,
-            "available_quantity": 4
+        "room_type_id": "rm-villa-01",
+        "name": "Royal Riverside Villa",
+        "bed_type": "1 King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 1
+        },
+        "price_per_night": 12500,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-villa-02",
-            "name": "Grand Chao Phraya Penthouse",
-            "bed_type": "2 King Beds",
-            "max_guests": {
-                  "adults": 4,
-                  "children": 2
-            },
-            "price_per_night": 22000,
-            "available_quantity": 2
+        "room_type_id": "rm-villa-02",
+        "name": "Grand Chao Phraya Penthouse",
+        "bed_type": "2 King Beds",
+        "max_guests": {
+          "adults": 4,
+          "children": 2
+        },
+        "price_per_night": 22000,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/siam-heritage-sanctuary/1.jpg","/images/siam-heritage-sanctuary/2.jpg","/images/siam-heritage-sanctuary/3.jpg","/images/siam-heritage-sanctuary/4.jpg","/images/siam-heritage-sanctuary/5.jpg"],
+    ],
+    pictures: ["/images/siam-heritage-sanctuary/1.jpg", "/images/siam-heritage-sanctuary/2.jpg", "/images/siam-heritage-sanctuary/3.jpg", "/images/siam-heritage-sanctuary/4.jpg", "/images/siam-heritage-sanctuary/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "The Grand Palace",
-            "distance": "2.5 km"
+        "name": "The Grand Palace",
+        "distance": "2.5 km"
       },
       {
-            "name": "Wat Arun (Temple of Dawn)",
-            "distance": "1.8 km"
+        "name": "Wat Arun (Temple of Dawn)",
+        "distance": "1.8 km"
       },
       {
-            "name": "ICONSIAM Luxury Mall",
-            "distance": "3.0 km"
+        "name": "ICONSIAM Luxury Mall",
+        "distance": "3.0 km"
       },
       {
-            "name": "Suvarnabhumi Airport",
-            "distance": "35 km"
+        "name": "Suvarnabhumi Airport",
+        "distance": "35 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -188,56 +188,56 @@ export const accommodations = [
     basePrice: 14200,
     description: "Sleek executive suites high above Sukhumvit, with panoramic skyline views and direct access to the BTS for effortless city exploring.",
     descriptionExtra: "Floor-to-ceiling glass wraps every suite, turning the Bangkok skyline into the room's centrepiece day and night.",
-    facilities: ["Free Wi-Fi","Pool","Gym","Rooftop Bar"],
-    specialOptions: ["Breakfast Included","Free Cancellation"],
+    facilities: ["Free Wi-Fi", "Pool", "Gym", "Rooftop Bar"],
+    specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
-            "room_type_id": "rm-skyline-executive-suites-01",
-            "name": "Skyline Executive Suites Standard Suite",
-            "bed_type": "1 King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 1
-            },
-            "price_per_night": 14200,
-            "available_quantity": 4
+        "room_type_id": "rm-skyline-executive-suites-01",
+        "name": "Skyline Executive Suites Standard Suite",
+        "bed_type": "1 King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 1
+        },
+        "price_per_night": 14200,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-skyline-executive-suites-02",
-            "name": "Skyline Executive Suites Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 17750,
-            "available_quantity": 2
+        "room_type_id": "rm-skyline-executive-suites-02",
+        "name": "Skyline Executive Suites Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 17750,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/skyline-executive-suites/1.jpg","/images/skyline-executive-suites/2.jpg","/images/skyline-executive-suites/3.jpg","/images/skyline-executive-suites/4.jpg","/images/skyline-executive-suites/5.jpg"],
+    ],
+    pictures: ["/images/skyline-executive-suites/1.jpg", "/images/skyline-executive-suites/2.jpg", "/images/skyline-executive-suites/3.jpg", "/images/skyline-executive-suites/4.jpg", "/images/skyline-executive-suites/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Terminal 21 Mall",
-            "distance": "0.3 km"
+        "name": "Terminal 21 Mall",
+        "distance": "0.3 km"
       },
       {
-            "name": "Benjakitti Forest Park",
-            "distance": "1.2 km"
+        "name": "Benjakitti Forest Park",
+        "distance": "1.2 km"
       },
       {
-            "name": "EmQuartier Shopping Centre",
-            "distance": "1.5 km"
+        "name": "EmQuartier Shopping Centre",
+        "distance": "1.5 km"
       },
       {
-            "name": "Suvarnabhumi Airport",
-            "distance": "28 km"
+        "name": "Suvarnabhumi Airport",
+        "distance": "28 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -257,56 +257,56 @@ export const accommodations = [
     basePrice: 8200,
     description: "A peaceful riverside estate facing the ancient temples of Ayutthaya, blending traditional wooden pavilions with modern comforts.",
     descriptionExtra: "Dine on the river terrace as illuminated stupas glow in the distance, then retire to bedrooms scented with natural cedar.",
-    facilities: ["Free Wi-Fi","Breakfast Included","River View"],
-    specialOptions: ["Breakfast Included","Free Cancellation"],
+    facilities: ["Free Wi-Fi", "Breakfast Included", "River View"],
+    specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
-            "room_type_id": "rm-ayutthaya-heritage-riverside-01",
-            "name": "Ayutthaya Heritage Riverside Standard Suite",
-            "bed_type": "1 King Bed + 1 Queen Bed",
-            "max_guests": {
-                  "adults": 4,
-                  "children": 1
-            },
-            "price_per_night": 8200,
-            "available_quantity": 4
+        "room_type_id": "rm-ayutthaya-heritage-riverside-01",
+        "name": "Ayutthaya Heritage Riverside Standard Suite",
+        "bed_type": "1 King Bed + 1 Queen Bed",
+        "max_guests": {
+          "adults": 4,
+          "children": 1
+        },
+        "price_per_night": 8200,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-ayutthaya-heritage-riverside-02",
-            "name": "Ayutthaya Heritage Riverside Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 10250,
-            "available_quantity": 2
+        "room_type_id": "rm-ayutthaya-heritage-riverside-02",
+        "name": "Ayutthaya Heritage Riverside Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 10250,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/ayutthaya-heritage-riverside/1.jpg","/images/ayutthaya-heritage-riverside/2.jpg","/images/ayutthaya-heritage-riverside/3.jpg","/images/ayutthaya-heritage-riverside/4.jpg","/images/ayutthaya-heritage-riverside/5.jpg"],
+    ],
+    pictures: ["/images/ayutthaya-heritage-riverside/1.jpg", "/images/ayutthaya-heritage-riverside/2.jpg", "/images/ayutthaya-heritage-riverside/3.jpg", "/images/ayutthaya-heritage-riverside/4.jpg", "/images/ayutthaya-heritage-riverside/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Wat Chaiwatthanaram",
-            "distance": "1.2 km"
+        "name": "Wat Chaiwatthanaram",
+        "distance": "1.2 km"
       },
       {
-            "name": "Ayutthaya Historical Park",
-            "distance": "2.8 km"
+        "name": "Ayutthaya Historical Park",
+        "distance": "2.8 km"
       },
       {
-            "name": "Chao Sam Phraya Museum",
-            "distance": "3.5 km"
+        "name": "Chao Sam Phraya Museum",
+        "distance": "3.5 km"
       },
       {
-            "name": "Don Mueang Airport",
-            "distance": "55 km"
+        "name": "Don Mueang Airport",
+        "distance": "55 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -326,56 +326,56 @@ export const accommodations = [
     basePrice: 6500,
     description: "Floating eco-villas moored on the Kwai Noi River, surrounded by sheer limestone cliffs and untouched rainforest.",
     descriptionExtra: "Step directly from your bedroom terrace into the cool, flowing river water for an authentic jungle experience.",
-    facilities: ["River Access","Spa","Free Wi-Fi"],
-    specialOptions: ["Breakfast Included","Free Cancellation"],
+    facilities: ["River Access", "Spa", "Free Wi-Fi"],
+    specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
-            "room_type_id": "rm-river-kwai-jungle-raft-01",
-            "name": "River Kwai Jungle Raft Resort Standard Suite",
-            "bed_type": "1 King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 1
-            },
-            "price_per_night": 6500,
-            "available_quantity": 4
+        "room_type_id": "rm-river-kwai-jungle-raft-01",
+        "name": "River Kwai Jungle Raft Resort Standard Suite",
+        "bed_type": "1 King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 1
+        },
+        "price_per_night": 6500,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-river-kwai-jungle-raft-02",
-            "name": "River Kwai Jungle Raft Resort Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 8125,
-            "available_quantity": 2
+        "room_type_id": "rm-river-kwai-jungle-raft-02",
+        "name": "River Kwai Jungle Raft Resort Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 8125,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/river-kwai-jungle-raft/1.jpg","/images/river-kwai-jungle-raft/2.jpg","/images/river-kwai-jungle-raft/3.jpg","/images/river-kwai-jungle-raft/4.jpg","/images/river-kwai-jungle-raft/5.jpg"],
+    ],
+    pictures: ["/images/river-kwai-jungle-raft/1.jpg", "/images/river-kwai-jungle-raft/2.jpg", "/images/river-kwai-jungle-raft/3.jpg", "/images/river-kwai-jungle-raft/4.jpg", "/images/river-kwai-jungle-raft/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Hellfire Pass Memorial",
-            "distance": "12 km"
+        "name": "Hellfire Pass Memorial",
+        "distance": "12 km"
       },
       {
-            "name": "Sai Yok Noi Waterfall",
-            "distance": "18 km"
+        "name": "Sai Yok Noi Waterfall",
+        "distance": "18 km"
       },
       {
-            "name": "Bridge on River Kwai",
-            "distance": "52 km"
+        "name": "Bridge on River Kwai",
+        "distance": "52 km"
       },
       {
-            "name": "Suvarnabhumi Airport",
-            "distance": "190 km"
+        "name": "Suvarnabhumi Airport",
+        "distance": "190 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -395,56 +395,56 @@ export const accommodations = [
     basePrice: 16800,
     description: "Colonial-inspired beachfront residence with a manicured lawn rolling down to the golden sands of Hua Hin's royal coast.",
     descriptionExtra: "Generous veranda living, private infinity pool and dedicated staff make this villa the choice for multi-generational escapes.",
-    facilities: ["Free Wi-Fi","Pool","Beach Access","Spa"],
-    specialOptions: ["Breakfast Included","Free Cancellation","Private Pool","Beachfront"],
+    facilities: ["Free Wi-Fi", "Pool", "Beach Access", "Spa"],
+    specialOptions: ["Breakfast Included", "Free Cancellation", "Private Pool", "Beachfront"],
     rooms: [
       {
-            "room_type_id": "rm-hua-hin-royal-beachfront-01",
-            "name": "Hua Hin Royal Beachfront Villa Standard Suite",
-            "bed_type": "1 King Bed + 1 Queen Bed",
-            "max_guests": {
-                  "adults": 4,
-                  "children": 1
-            },
-            "price_per_night": 16800,
-            "available_quantity": 4
+        "room_type_id": "rm-hua-hin-royal-beachfront-01",
+        "name": "Hua Hin Royal Beachfront Villa Standard Suite",
+        "bed_type": "1 King Bed + 1 Queen Bed",
+        "max_guests": {
+          "adults": 4,
+          "children": 1
+        },
+        "price_per_night": 16800,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-hua-hin-royal-beachfront-02",
-            "name": "Hua Hin Royal Beachfront Villa Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 21000,
-            "available_quantity": 2
+        "room_type_id": "rm-hua-hin-royal-beachfront-02",
+        "name": "Hua Hin Royal Beachfront Villa Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 21000,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/hua-hin-royal-beachfront/1.jpg","/images/hua-hin-royal-beachfront/2.jpg","/images/hua-hin-royal-beachfront/3.jpg","/images/hua-hin-royal-beachfront/4.jpg","/images/hua-hin-royal-beachfront/5.jpg"],
+    ],
+    pictures: ["/images/hua-hin-royal-beachfront/1.jpg", "/images/hua-hin-royal-beachfront/2.jpg", "/images/hua-hin-royal-beachfront/3.jpg", "/images/hua-hin-royal-beachfront/4.jpg", "/images/hua-hin-royal-beachfront/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Cicada Night Market",
-            "distance": "1.5 km"
+        "name": "Cicada Night Market",
+        "distance": "1.5 km"
       },
       {
-            "name": "Royal Hua Hin Golf Club",
-            "distance": "3.2 km"
+        "name": "Royal Hua Hin Golf Club",
+        "distance": "3.2 km"
       },
       {
-            "name": "Khao Takiab Temple",
-            "distance": "4.0 km"
+        "name": "Khao Takiab Temple",
+        "distance": "4.0 km"
       },
       {
-            "name": "Hua Hin Airport",
-            "distance": "9.5 km"
+        "name": "Hua Hin Airport",
+        "distance": "9.5 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -464,56 +464,56 @@ export const accommodations = [
     basePrice: 9500,
     description: "Canopy tents suspended above a private valley, with open-air bathing, forest dining and guided morning treks through the highlands surrounding Chiang Mai.",
     descriptionExtra: "A rare blend of adventure and comfort — wake to birdsong and mist rolling through the canopy below your deck.",
-    facilities: ["Free Wi-Fi","Breakfast Included","Forest Dining"],
-    specialOptions: ["Breakfast Included","Free Cancellation"],
+    facilities: ["Free Wi-Fi", "Breakfast Included", "Forest Dining"],
+    specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
-            "room_type_id": "rm-emerald-jungle-retreat-01",
-            "name": "Emerald Jungle Retreat Standard Suite",
-            "bed_type": "1 King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 1
-            },
-            "price_per_night": 9500,
-            "available_quantity": 4
+        "room_type_id": "rm-emerald-jungle-retreat-01",
+        "name": "Emerald Jungle Retreat Standard Suite",
+        "bed_type": "1 King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 1
+        },
+        "price_per_night": 9500,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-emerald-jungle-retreat-02",
-            "name": "Emerald Jungle Retreat Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 11875,
-            "available_quantity": 2
+        "room_type_id": "rm-emerald-jungle-retreat-02",
+        "name": "Emerald Jungle Retreat Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 11875,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/emerald-jungle-retreat/1.jpg","/images/emerald-jungle-retreat/2.jpg","/images/emerald-jungle-retreat/3.jpg","/images/emerald-jungle-retreat/4.jpg","/images/emerald-jungle-retreat/5.jpg"],
+    ],
+    pictures: ["/images/emerald-jungle-retreat/1.jpg", "/images/emerald-jungle-retreat/2.jpg", "/images/emerald-jungle-retreat/3.jpg", "/images/emerald-jungle-retreat/4.jpg", "/images/emerald-jungle-retreat/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Mae Sa Waterfall",
-            "distance": "4.2 km"
+        "name": "Mae Sa Waterfall",
+        "distance": "4.2 km"
       },
       {
-            "name": "Elephant Sanctuary",
-            "distance": "6.0 km"
+        "name": "Elephant Sanctuary",
+        "distance": "6.0 km"
       },
       {
-            "name": "Chiang Mai Old City",
-            "distance": "18 km"
+        "name": "Chiang Mai Old City",
+        "distance": "18 km"
       },
       {
-            "name": "Chiang Mai Airport",
-            "distance": "24 km"
+        "name": "Chiang Mai Airport",
+        "distance": "24 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -533,56 +533,56 @@ export const accommodations = [
     basePrice: 7500,
     description: "Perched on a ridge above the Pai valley, this timber lodge wakes to a sea of morning mist rolling between the hills.",
     descriptionExtra: "Floor-to-ceiling windows frame the valley from every room, with a wraparound deck built for slow mountain mornings.",
-    facilities: ["Free Wi-Fi","Breakfast Included","Mountain View"],
-    specialOptions: ["Breakfast Included","Free Cancellation"],
+    facilities: ["Free Wi-Fi", "Breakfast Included", "Mountain View"],
+    specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
-            "room_type_id": "rm-doi-mist-mountain-lodge-01",
-            "name": "Doi Mist Mountain Lodge Standard Suite",
-            "bed_type": "1 King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 1
-            },
-            "price_per_night": 7500,
-            "available_quantity": 4
+        "room_type_id": "rm-doi-mist-mountain-lodge-01",
+        "name": "Doi Mist Mountain Lodge Standard Suite",
+        "bed_type": "1 King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 1
+        },
+        "price_per_night": 7500,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-doi-mist-mountain-lodge-02",
-            "name": "Doi Mist Mountain Lodge Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 9375,
-            "available_quantity": 2
+        "room_type_id": "rm-doi-mist-mountain-lodge-02",
+        "name": "Doi Mist Mountain Lodge Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 9375,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/doi-mist-mountain-lodge/1.jpg","/images/doi-mist-mountain-lodge/2.jpg","/images/doi-mist-mountain-lodge/3.jpg","/images/doi-mist-mountain-lodge/4.jpg","/images/doi-mist-mountain-lodge/5.jpg"],
+    ],
+    pictures: ["/images/doi-mist-mountain-lodge/1.jpg", "/images/doi-mist-mountain-lodge/2.jpg", "/images/doi-mist-mountain-lodge/3.jpg", "/images/doi-mist-mountain-lodge/4.jpg", "/images/doi-mist-mountain-lodge/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Pai Canyon",
-            "distance": "3.5 km"
+        "name": "Pai Canyon",
+        "distance": "3.5 km"
       },
       {
-            "name": "Pai Walking Street",
-            "distance": "5.0 km"
+        "name": "Pai Walking Street",
+        "distance": "5.0 km"
       },
       {
-            "name": "Mo Paeng Waterfall",
-            "distance": "8.0 km"
+        "name": "Mo Paeng Waterfall",
+        "distance": "8.0 km"
       },
       {
-            "name": "Pai Airport",
-            "distance": "4.0 km"
+        "name": "Pai Airport",
+        "distance": "4.0 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -602,56 +602,56 @@ export const accommodations = [
     basePrice: 6800,
     description: "Traditional northern architecture meets serene Kok River frontage, featuring handcrafted teak furnishings and landscaped gardens.",
     descriptionExtra: "Every detail honors Lanna craftsmanship — woven textiles, carved lintels and a quiet courtyard courtyard shaded by rain trees.",
-    facilities: ["Free Wi-Fi","River View","Pool"],
-    specialOptions: ["Breakfast Included","Free Cancellation"],
+    facilities: ["Free Wi-Fi", "River View", "Pool"],
+    specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
-            "room_type_id": "rm-lanna-riverside-boutique-01",
-            "name": "Lanna Riverside Boutique Standard Suite",
-            "bed_type": "1 King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 1
-            },
-            "price_per_night": 6800,
-            "available_quantity": 4
+        "room_type_id": "rm-lanna-riverside-boutique-01",
+        "name": "Lanna Riverside Boutique Standard Suite",
+        "bed_type": "1 King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 1
+        },
+        "price_per_night": 6800,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-lanna-riverside-boutique-02",
-            "name": "Lanna Riverside Boutique Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 8500,
-            "available_quantity": 2
+        "room_type_id": "rm-lanna-riverside-boutique-02",
+        "name": "Lanna Riverside Boutique Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 8500,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/lanna-riverside-boutique/1.jpg","/images/lanna-riverside-boutique/2.jpg","/images/lanna-riverside-boutique/3.jpg","/images/lanna-riverside-boutique/4.jpg","/images/lanna-riverside-boutique/5.jpg"],
+    ],
+    pictures: ["/images/lanna-riverside-boutique/1.jpg", "/images/lanna-riverside-boutique/2.jpg", "/images/lanna-riverside-boutique/3.jpg", "/images/lanna-riverside-boutique/4.jpg", "/images/lanna-riverside-boutique/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Wat Rong Khun (White Temple)",
-            "distance": "11 km"
+        "name": "Wat Rong Khun (White Temple)",
+        "distance": "11 km"
       },
       {
-            "name": "Baan Dam Museum",
-            "distance": "8.5 km"
+        "name": "Baan Dam Museum",
+        "distance": "8.5 km"
       },
       {
-            "name": "Chiang Rai Night Bazaar",
-            "distance": "2.0 km"
+        "name": "Chiang Rai Night Bazaar",
+        "distance": "2.0 km"
       },
       {
-            "name": "Mae Fah Luang Airport",
-            "distance": "7.0 km"
+        "name": "Mae Fah Luang Airport",
+        "distance": "7.0 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -671,56 +671,56 @@ export const accommodations = [
     basePrice: 4200,
     description: "Elevated teak wood pavilions surrounded by emerald paddies, offering an authentic glimpse of rural northeast living.",
     descriptionExtra: "Participate in morning sticky rice rituals, cycle quiet village lanes and fall asleep to the gentle chorus of the fields.",
-    facilities: ["Free Wi-Fi","Breakfast Included","Cooking Class"],
-    specialOptions: ["Breakfast Included","Free Cancellation"],
+    facilities: ["Free Wi-Fi", "Breakfast Included", "Cooking Class"],
+    specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
-            "room_type_id": "rm-isan-ricefield-homestay-01",
-            "name": "Isan Ricefield Heritage Homestay Standard Suite",
-            "bed_type": "1 King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 1
-            },
-            "price_per_night": 4200,
-            "available_quantity": 4
+        "room_type_id": "rm-isan-ricefield-homestay-01",
+        "name": "Isan Ricefield Heritage Homestay Standard Suite",
+        "bed_type": "1 King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 1
+        },
+        "price_per_night": 4200,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-isan-ricefield-homestay-02",
-            "name": "Isan Ricefield Heritage Homestay Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 5250,
-            "available_quantity": 2
+        "room_type_id": "rm-isan-ricefield-homestay-02",
+        "name": "Isan Ricefield Heritage Homestay Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 5250,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/isan-ricefield-homestay/1.jpg","/images/isan-ricefield-homestay/2.jpg","/images/isan-ricefield-homestay/3.jpg","/images/isan-ricefield-homestay/4.jpg","/images/isan-ricefield-homestay/5.jpg"],
+    ],
+    pictures: ["/images/isan-ricefield-homestay/1.jpg", "/images/isan-ricefield-homestay/2.jpg", "/images/isan-ricefield-homestay/3.jpg", "/images/isan-ricefield-homestay/4.jpg", "/images/isan-ricefield-homestay/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Wat Nong Pah Pong",
-            "distance": "6.0 km"
+        "name": "Wat Nong Pah Pong",
+        "distance": "6.0 km"
       },
       {
-            "name": "Ubon Ratchathani Museum",
-            "distance": "8.5 km"
+        "name": "Ubon Ratchathani Museum",
+        "distance": "8.5 km"
       },
       {
-            "name": "Thung Si Mueang Park",
-            "distance": "9.0 km"
+        "name": "Thung Si Mueang Park",
+        "distance": "9.0 km"
       },
       {
-            "name": "Ubon Airport",
-            "distance": "12 km"
+        "name": "Ubon Airport",
+        "distance": "12 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -740,56 +740,56 @@ export const accommodations = [
     basePrice: 5600,
     description: "Boutique villas right on the edge of the mighty Mekong, watching local longtail boats drift toward sunset over Laos.",
     descriptionExtra: "An open-air riverside pavilion serves fresh Mekong fish prepared with local herbs as the border lights flicker across the water.",
-    facilities: ["Free Wi-Fi","River View","Pool"],
-    specialOptions: ["Breakfast Included","Free Cancellation"],
+    facilities: ["Free Wi-Fi", "River View", "Pool"],
+    specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
-            "room_type_id": "rm-mekong-riverside-retreat-01",
-            "name": "Mekong Riverside Retreat Standard Suite",
-            "bed_type": "1 King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 1
-            },
-            "price_per_night": 5600,
-            "available_quantity": 4
+        "room_type_id": "rm-mekong-riverside-retreat-01",
+        "name": "Mekong Riverside Retreat Standard Suite",
+        "bed_type": "1 King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 1
+        },
+        "price_per_night": 5600,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-mekong-riverside-retreat-02",
-            "name": "Mekong Riverside Retreat Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 7000,
-            "available_quantity": 2
+        "room_type_id": "rm-mekong-riverside-retreat-02",
+        "name": "Mekong Riverside Retreat Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 7000,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/mekong-riverside-retreat/1.jpg","/images/mekong-riverside-retreat/2.jpg","/images/mekong-riverside-retreat/3.jpg","/images/mekong-riverside-retreat/4.jpg","/images/mekong-riverside-retreat/5.jpg"],
+    ],
+    pictures: ["/images/mekong-riverside-retreat/1.jpg", "/images/mekong-riverside-retreat/2.jpg", "/images/mekong-riverside-retreat/3.jpg", "/images/mekong-riverside-retreat/4.jpg", "/images/mekong-riverside-retreat/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Sala Keoku Sculpture Park",
-            "distance": "7.5 km"
+        "name": "Sala Keoku Sculpture Park",
+        "distance": "7.5 km"
       },
       {
-            "name": "Thai-Lao Friendship Bridge",
-            "distance": "5.0 km"
+        "name": "Thai-Lao Friendship Bridge",
+        "distance": "5.0 km"
       },
       {
-            "name": "Tha Sadet Market",
-            "distance": "3.2 km"
+        "name": "Tha Sadet Market",
+        "distance": "3.2 km"
       },
       {
-            "name": "Udon Thani Airport",
-            "distance": "58 km"
+        "name": "Udon Thani Airport",
+        "distance": "58 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -809,56 +809,56 @@ export const accommodations = [
     basePrice: 11000,
     description: "Tuscan-inspired private stone villas tucked between rolling grapevines with cool mountain breezes year-round.",
     descriptionExtra: "Private wine tastings on your terrace, outdoor fireplace for chilly evenings, and waking to mist over the vines.",
-    facilities: ["Free Wi-Fi","Wine Tasting","Pool","Spa"],
-    specialOptions: ["Breakfast Included","Free Cancellation","Private Pool"],
+    facilities: ["Free Wi-Fi", "Wine Tasting", "Pool", "Spa"],
+    specialOptions: ["Breakfast Included", "Free Cancellation", "Private Pool"],
     rooms: [
       {
-            "room_type_id": "rm-khaoyai-vineyard-villas-01",
-            "name": "Khao Yai Vineyard Villas Standard Suite",
-            "bed_type": "1 King Bed + 1 Queen Bed",
-            "max_guests": {
-                  "adults": 4,
-                  "children": 1
-            },
-            "price_per_night": 11000,
-            "available_quantity": 4
+        "room_type_id": "rm-khaoyai-vineyard-villas-01",
+        "name": "Khao Yai Vineyard Villas Standard Suite",
+        "bed_type": "1 King Bed + 1 Queen Bed",
+        "max_guests": {
+          "adults": 4,
+          "children": 1
+        },
+        "price_per_night": 11000,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-khaoyai-vineyard-villas-02",
-            "name": "Khao Yai Vineyard Villas Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 13750,
-            "available_quantity": 2
+        "room_type_id": "rm-khaoyai-vineyard-villas-02",
+        "name": "Khao Yai Vineyard Villas Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 13750,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/khaoyai-vineyard-villas/1.jpg","/images/khaoyai-vineyard-villas/2.jpg","/images/khaoyai-vineyard-villas/3.jpg","/images/khaoyai-vineyard-villas/4.jpg","/images/khaoyai-vineyard-villas/5.jpg"],
+    ],
+    pictures: ["/images/khaoyai-vineyard-villas/1.jpg", "/images/khaoyai-vineyard-villas/2.jpg", "/images/khaoyai-vineyard-villas/3.jpg", "/images/khaoyai-vineyard-villas/4.jpg", "/images/khaoyai-vineyard-villas/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Khao Yai National Park Gate",
-            "distance": "8.0 km"
+        "name": "Khao Yai National Park Gate",
+        "distance": "8.0 km"
       },
       {
-            "name": "PB Valley Winery",
-            "distance": "4.5 km"
+        "name": "PB Valley Winery",
+        "distance": "4.5 km"
       },
       {
-            "name": "Primo Piazza",
-            "distance": "6.0 km"
+        "name": "Primo Piazza",
+        "distance": "6.0 km"
       },
       {
-            "name": "Don Mueang Airport",
-            "distance": "135 km"
+        "name": "Don Mueang Airport",
+        "distance": "135 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -866,7 +866,7 @@ export const accommodations = [
     id: "amanpuri-retreat-villas",
     name: "Amanpuri Retreat Villas",
     category: "Private Villa",
-    categories: ["Private Villa","Luxury Resort"],
+    categories: ["Private Villa", "Luxury Resort"],
     region: "south",
     city: "Phuket",
     district: "Cherngtalay",
@@ -878,56 +878,56 @@ export const accommodations = [
     basePrice: 18500,
     description: "Iconic pavilions set within a coconut grove overlooking the Andaman Sea, setting the global standard for secluded coastal luxury.",
     descriptionExtra: "Private black-tiled swimming pool, direct steps to Pansea Beach's secluded cove and a holistic wellness centre.",
-    facilities: ["Free Wi-Fi","Pool","Spa","Gym","Beach Access"],
-    specialOptions: ["Breakfast Included","Free Cancellation","Private Pool","Beachfront"],
+    facilities: ["Free Wi-Fi", "Pool", "Spa", "Gym", "Beach Access"],
+    specialOptions: ["Breakfast Included", "Free Cancellation", "Private Pool", "Beachfront"],
     rooms: [
       {
-            "room_type_id": "rm-amanpuri-retreat-villas-01",
-            "name": "Amanpuri Retreat Villas Standard Suite",
-            "bed_type": "1 King Bed + 1 Queen Bed",
-            "max_guests": {
-                  "adults": 4,
-                  "children": 1
-            },
-            "price_per_night": 18500,
-            "available_quantity": 4
+        "room_type_id": "rm-amanpuri-retreat-villas-01",
+        "name": "Amanpuri Retreat Villas Standard Suite",
+        "bed_type": "1 King Bed + 1 Queen Bed",
+        "max_guests": {
+          "adults": 4,
+          "children": 1
+        },
+        "price_per_night": 18500,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-amanpuri-retreat-villas-02",
-            "name": "Amanpuri Retreat Villas Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 23125,
-            "available_quantity": 2
+        "room_type_id": "rm-amanpuri-retreat-villas-02",
+        "name": "Amanpuri Retreat Villas Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 23125,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/amanpuri-retreat-villas/1.jpg","/images/amanpuri-retreat-villas/2.jpg","/images/amanpuri-retreat-villas/3.jpg","/images/amanpuri-retreat-villas/4.jpg","/images/amanpuri-retreat-villas/5.jpg"],
+    ],
+    pictures: ["/images/amanpuri-retreat-villas/1.jpg", "/images/amanpuri-retreat-villas/2.jpg", "/images/amanpuri-retreat-villas/3.jpg", "/images/amanpuri-retreat-villas/4.jpg", "/images/amanpuri-retreat-villas/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Pansea Beach",
-            "distance": "0.1 km"
+        "name": "Pansea Beach",
+        "distance": "0.1 km"
       },
       {
-            "name": "Surin Beach",
-            "distance": "1.2 km"
+        "name": "Surin Beach",
+        "distance": "1.2 km"
       },
       {
-            "name": "Catch Beach Club",
-            "distance": "4.5 km"
+        "name": "Catch Beach Club",
+        "distance": "4.5 km"
       },
       {
-            "name": "Phuket International Airport",
-            "distance": "22 km"
+        "name": "Phuket International Airport",
+        "distance": "22 km"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -947,56 +947,56 @@ export const accommodations = [
     basePrice: 13500,
     description: "Accessible only by sea, these cliffside pavilions sit wedged between towering limestone karsts and turquoise Andaman waters.",
     descriptionExtra: "Listen to the gentle slap of waves against the rocks below while watching rock climbers scale the sheer limestone faces.",
-    facilities: ["Free Wi-Fi","Pool","Beach Access","Spa"],
-    specialOptions: ["Breakfast Included","Free Cancellation","Beachfront"],
+    facilities: ["Free Wi-Fi", "Pool", "Beach Access", "Spa"],
+    specialOptions: ["Breakfast Included", "Free Cancellation", "Beachfront"],
     rooms: [
       {
-            "room_type_id": "rm-railay-cliff-beach-villas-01",
-            "name": "Railay Cliff Beach Villas Standard Suite",
-            "bed_type": "1 King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 1
-            },
-            "price_per_night": 13500,
-            "available_quantity": 4
+        "room_type_id": "rm-railay-cliff-beach-villas-01",
+        "name": "Railay Cliff Beach Villas Standard Suite",
+        "bed_type": "1 King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 1
+        },
+        "price_per_night": 13500,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-railay-cliff-beach-villas-02",
-            "name": "Railay Cliff Beach Villas Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 16875,
-            "available_quantity": 2
+        "room_type_id": "rm-railay-cliff-beach-villas-02",
+        "name": "Railay Cliff Beach Villas Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 16875,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/railay-cliff-beach-villas/1.jpg","/images/railay-cliff-beach-villas/2.jpg","/images/railay-cliff-beach-villas/3.jpg","/images/railay-cliff-beach-villas/4.jpg","/images/railay-cliff-beach-villas/5.jpg"],
+    ],
+    pictures: ["/images/railay-cliff-beach-villas/1.jpg", "/images/railay-cliff-beach-villas/2.jpg", "/images/railay-cliff-beach-villas/3.jpg", "/images/railay-cliff-beach-villas/4.jpg", "/images/railay-cliff-beach-villas/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Railay West Beach",
-            "distance": "0.2 km"
+        "name": "Railay West Beach",
+        "distance": "0.2 km"
       },
       {
-            "name": "Phra Nang Cave Beach",
-            "distance": "0.8 km"
+        "name": "Phra Nang Cave Beach",
+        "distance": "0.8 km"
       },
       {
-            "name": "Railay Viewpoint",
-            "distance": "0.6 km"
+        "name": "Railay Viewpoint",
+        "distance": "0.6 km"
       },
       {
-            "name": "Krabi Airport",
-            "distance": "28 km (via boat)"
+        "name": "Krabi Airport",
+        "distance": "28 km (via boat)"
       }
-],
+    ],
   }),
 
   buildAccommodation({
@@ -1004,7 +1004,7 @@ export const accommodations = [
     id: "four-seasons-samui-cove",
     name: "Four Seasons Samui Cove",
     category: "Private Villa",
-    categories: ["Private Villa","Luxury Resort"],
+    categories: ["Private Villa", "Luxury Resort"],
     region: "south",
     city: "Surat Thani",
     district: "Koh Samui",
@@ -1016,56 +1016,56 @@ export const accommodations = [
     basePrice: 17200,
     description: "Hillside pool villas cascading down a private bay with uninterrupted views across the Gulf of Thailand.",
     descriptionExtra: "Surrounded by tropical gardens and fruit orchards, every villa offers an infinity-edge pool that merges with the horizon.",
-    facilities: ["Free Wi-Fi","Pool","Beach Access","Spa","Gym"],
-    specialOptions: ["Breakfast Included","Free Cancellation","Private Pool","Beachfront"],
+    facilities: ["Free Wi-Fi", "Pool", "Beach Access", "Spa", "Gym"],
+    specialOptions: ["Breakfast Included", "Free Cancellation", "Private Pool", "Beachfront"],
     rooms: [
       {
-            "room_type_id": "rm-four-seasons-samui-cove-01",
-            "name": "Four Seasons Samui Cove Standard Suite",
-            "bed_type": "1 King Bed + 1 Queen Bed",
-            "max_guests": {
-                  "adults": 4,
-                  "children": 1
-            },
-            "price_per_night": 17200,
-            "available_quantity": 4
+        "room_type_id": "rm-four-seasons-samui-cove-01",
+        "name": "Four Seasons Samui Cove Standard Suite",
+        "bed_type": "1 King Bed + 1 Queen Bed",
+        "max_guests": {
+          "adults": 4,
+          "children": 1
+        },
+        "price_per_night": 17200,
+        "available_quantity": 4
       },
       {
-            "room_type_id": "rm-four-seasons-samui-cove-02",
-            "name": "Four Seasons Samui Cove Deluxe Villa",
-            "bed_type": "1 Super King Bed",
-            "max_guests": {
-                  "adults": 2,
-                  "children": 2
-            },
-            "price_per_night": 21500,
-            "available_quantity": 2
+        "room_type_id": "rm-four-seasons-samui-cove-02",
+        "name": "Four Seasons Samui Cove Deluxe Villa",
+        "bed_type": "1 Super King Bed",
+        "max_guests": {
+          "adults": 2,
+          "children": 2
+        },
+        "price_per_night": 21500,
+        "available_quantity": 2
       }
-],
-    pictures: ["/images/four-seasons-samui-cove/1.jpg","/images/four-seasons-samui-cove/2.jpg","/images/four-seasons-samui-cove/3.jpg","/images/four-seasons-samui-cove/4.jpg","/images/four-seasons-samui-cove/5.jpg"],
+    ],
+    pictures: ["/images/four-seasons-samui-cove/1.jpg", "/images/four-seasons-samui-cove/2.jpg", "/images/four-seasons-samui-cove/3.jpg", "/images/four-seasons-samui-cove/4.jpg", "/images/four-seasons-samui-cove/5.jpg"],
     policies: {
       "cancellation_policy": "Free cancellation up to 48 hours before check-in",
-      "check_in_time": "15:00",
+      "check_in_time": "13:00",
       "check_out_time": "12:00"
-},
+    },
     nearby: [
       {
-            "name": "Choeng Mon Beach",
-            "distance": "2.0 km"
+        "name": "Choeng Mon Beach",
+        "distance": "2.0 km"
       },
       {
-            "name": "Fisherman's Village",
-            "distance": "6.0 km"
+        "name": "Fisherman's Village",
+        "distance": "6.0 km"
       },
       {
-            "name": "Big Buddha Temple",
-            "distance": "5.5 km"
+        "name": "Big Buddha Temple",
+        "distance": "5.5 km"
       },
       {
-            "name": "Samui Airport",
-            "distance": "7.0 km"
+        "name": "Samui Airport",
+        "distance": "7.0 km"
       }
-],
+    ],
   }),
 
 ];

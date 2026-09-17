@@ -45,7 +45,7 @@ const roomSchema = new mongoose.Schema(
 const policiesSchema = new mongoose.Schema(
   {
     cancellation_policy: { type: String },
-    check_in_time: { type: String, default: "15:00" },
+    check_in_time: { type: String, default: "13:00" },
     check_out_time: { type: String, default: "12:00" },
   },
   { _id: false }
