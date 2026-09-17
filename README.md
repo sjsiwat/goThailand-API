@@ -1,4 +1,15 @@
-GO-THAILAND Backend
+### GO-THAILAND Backend
+
+### MAIN API PATH
+
+https://gothailand-api.onrender.com
+
+### routes API
+
+https://gothailand-api.onrender.com/api/accommodations
+https://gothailand-api.onrender.com/api/cars
+https://gothailand-api.onrender.com/api/guides
+https://gothailand-api.onrender.com/api/users
 
 Backend API สำหรับโปรเจกต์ GO-THAILAND — Team 8
 
