@@ -5,6 +5,7 @@ import seedAccommodations from "./accommodation.seed.js";
 import seedCars from "./car.seed.js";
 import seedGuides from "./guide.seed.js";
 import seedUsers from "./user.seed.js";
+import seedProvinces from "./province.seed.js";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ async function seedAll() {
     await seedCars();
     await seedGuides();
     await seedUsers();
+    await seedProvinces();
 
     console.log("All seed data inserted successfully! 🎉");
 
