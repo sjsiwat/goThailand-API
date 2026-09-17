@@ -136,7 +136,4 @@ const bookingSchema = new mongoose.Schema({
 export const Car = mongoose.model('Car', carSchema);
 export const Booking = mongoose.model('Booking', bookingSchema);
 
-export default {
-  Car,
-  Booking
-};
+export default Car;
