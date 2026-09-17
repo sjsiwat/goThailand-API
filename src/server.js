@@ -30,6 +30,6 @@ connectDB();
 
 const PORT = process.env.PORT || 5001;
 
-app.listen(PORT, () => {
-  console.log(`Go THAILAND Server running on http://localhost:${PORT} ✅`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Go THAILAND Server running on port ${PORT} ✅`);
 });
