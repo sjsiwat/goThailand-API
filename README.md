@@ -2,6 +2,8 @@
 
 Backend API สำหรับโปรเจกต์ **GO-THAILAND**
 
+> 📋 **Data Schema Documentation:** ดูเอกสารสรุปโครงสร้างข้อมูลและตัวอย่าง JSON (Accommodation, Car, Province) ได้ที่ **[DataSchema.md](./DataSchema.md)**
+
 ## Main API Path
 
 ```
@@ -13,6 +15,7 @@ https://gothailand-api.onrender.com
 ```
 https://gothailand-api.onrender.com/api/accommodations
 https://gothailand-api.onrender.com/api/cars
+https://gothailand-api.onrender.com/api/provinces
 https://gothailand-api.onrender.com/api/guides
 https://gothailand-api.onrender.com/api/users
 ```
@@ -21,6 +24,7 @@ Backend นี้ใช้สำหรับจัดการข้อมูล
 
 - 🏨 Accommodation
 - 🚗 Car
+- 🗺️ Province
 - 🧑‍🏫 Guide
 - 👤 User
 
