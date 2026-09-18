@@ -1,31 +1,63 @@
-import express from "express";
-import Guide from "../models/Guide.js";
+import express from 'express';
+import Guide from '../models/Guide.js'; // สมมติว่า Model ของคุณชื่อ Guide
 
 const router = express.Router();
 
-// GET - Get all guides
-router.get("/", async (req, res) => {
+// 1. CREATE: เพิ่มไกด์ใหม่
+router.post("/", async (req, res) => {
   try {
-    const guides = await Guide.find();
-
-    res.json(guides);
+    const newGuide = new Guide(req.body);
+    const savedGuide = await newGuide.save();
+    res.status(201).json(savedGuide);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    res.status(400).json({ message: error.message });
   }
 });
 
-// POST - Create guide
-router.post("/", async (req, res) => {
+// 2. READ: ดึงรายการไกด์ทั้งหมด
+router.get("/", async (req, res) => {
   try {
-    const guide = await Guide.create(req.body);
-
-    res.status(201).json(guide);
+    const guides = await Guide.find();
+    res.status(200).json(guides);
   } catch (error) {
-    res.status(500).json({
-      message: error.message,
-    });
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// 3. READ: ดึงข้อมูลไกด์ตาม ID
+router.get("/:id", async (req, res) => {
+  try {
+    const guide = await Guide.findById(req.params.id);
+    if (!guide) return res.status(404).json({ message: "Guide not found" });
+    res.status(200).json(guide);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// 4. UPDATE: แก้ไขข้อมูลไกด์
+router.patch("/:id", async (req, res) => {
+  try {
+    const updatedGuide = await Guide.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true } // ให้คืนค่าข้อมูลที่อัปเดตแล้วกลับมา
+    );
+    if (!updatedGuide) return res.status(404).json({ message: "Guide not found" });
+    res.status(200).json(updatedGuide);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+// 5. DELETE: ลบข้อมูลไกด์
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedGuide = await Guide.findByIdAndDelete(req.params.id);
+    if (!deletedGuide) return res.status(404).json({ message: "Guide not found" });
+    res.status(200).json({ message: "Guide deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 });
 
