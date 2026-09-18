@@ -1,4 +1,5 @@
 import Accommodation from "../models/Accommodation.js";
+import { provinces } from "./province.seed.js";
 
 function makeLocation(city, district, addressLabel, nearby = [], coordinates = null) {
   return {
@@ -101,7 +102,7 @@ function buildAccommodation({
   };
 }
 
-export const accommodations = [
+const curatedAccommodations = [
   buildAccommodation({
     _id: 1,
     id: "siam-heritage-sanctuary",
@@ -119,7 +120,7 @@ export const accommodations = [
     basePrice: 12500,
     description: "Experience unparalleled luxury in the heart of Bangkok. The Siam Heritage Sanctuary offers a profound sense of place, blending deep-rooted Thai architectural traditions with exquisite contemporary comfort. Set amidst lush, manicured gardens along the historic Chao Phraya River, this exclusive retreat promises serenity and absolute privacy.",
     descriptionExtra: "Each villa is a masterpiece of design — teak interiors, towering vaulted ceilings and curated antiques. Step outside to your expansive private deck, where a personal infinity pool merges visually with the river beyond.",
-    facilities: ["Free High-Speed Wi-Fi", "Private Infinity Pool", "24/7 Butler Service", "Holistic Spa", "State-of-the-Art Gym", "Fine Dining"],
+    facilities: ["Free Wi-Fi", "Swimming Pool", "Room Service", "Spa", "Gym", "Restaurant"],
     specialOptions: ["Breakfast Included", "Free Cancellation", "Private Pool", "Beachfront"],
     rooms: [
       {
@@ -188,7 +189,7 @@ export const accommodations = [
     basePrice: 14200,
     description: "Sleek executive suites high above Sukhumvit, with panoramic skyline views and direct access to the BTS for effortless city exploring.",
     descriptionExtra: "Floor-to-ceiling glass wraps every suite, turning the Bangkok skyline into the room's centrepiece day and night.",
-    facilities: ["Free Wi-Fi", "Pool", "Gym", "Rooftop Bar"],
+    facilities: ["Free Wi-Fi", "Swimming Pool", "Gym", "Bar"],
     specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
@@ -244,12 +245,12 @@ export const accommodations = [
     _id: 3,
     id: "ayutthaya-heritage-riverside",
     name: "Ayutthaya Heritage Riverside",
-    category: "B&B",
-    categories: ["B&B"],
+    category: "Bed & Breakfast",
+    categories: ["Bed & Breakfast"],
     region: "central",
-    city: "Ayutthaya",
+    city: "Phra Nakhon Si Ayutthaya",
     district: "Phra Nakhon Si Ayutthaya",
-    addressLabel: "Ayutthaya, Thailand",
+    addressLabel: "Phra Nakhon Si Ayutthaya, Thailand",
     lat: 14.3532,
     lng: 100.5684,
     ratingAvg: 4.8,
@@ -257,7 +258,7 @@ export const accommodations = [
     basePrice: 8200,
     description: "A peaceful riverside estate facing the ancient temples of Ayutthaya, blending traditional wooden pavilions with modern comforts.",
     descriptionExtra: "Dine on the river terrace as illuminated stupas glow in the distance, then retire to bedrooms scented with natural cedar.",
-    facilities: ["Free Wi-Fi", "Breakfast Included", "River View"],
+    facilities: ["Free Wi-Fi", "Restaurant", "River View"],
     specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
@@ -326,7 +327,7 @@ export const accommodations = [
     basePrice: 6500,
     description: "Floating eco-villas moored on the Kwai Noi River, surrounded by sheer limestone cliffs and untouched rainforest.",
     descriptionExtra: "Step directly from your bedroom terrace into the cool, flowing river water for an authentic jungle experience.",
-    facilities: ["River Access", "Spa", "Free Wi-Fi"],
+    facilities: ["River View", "Spa", "Free Wi-Fi"],
     specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
@@ -395,7 +396,7 @@ export const accommodations = [
     basePrice: 16800,
     description: "Colonial-inspired beachfront residence with a manicured lawn rolling down to the golden sands of Hua Hin's royal coast.",
     descriptionExtra: "Generous veranda living, private infinity pool and dedicated staff make this villa the choice for multi-generational escapes.",
-    facilities: ["Free Wi-Fi", "Pool", "Beach Access", "Spa"],
+    facilities: ["Free Wi-Fi", "Swimming Pool", "Beach Access", "Spa"],
     specialOptions: ["Breakfast Included", "Free Cancellation", "Private Pool", "Beachfront"],
     rooms: [
       {
@@ -464,7 +465,7 @@ export const accommodations = [
     basePrice: 9500,
     description: "Canopy tents suspended above a private valley, with open-air bathing, forest dining and guided morning treks through the highlands surrounding Chiang Mai.",
     descriptionExtra: "A rare blend of adventure and comfort — wake to birdsong and mist rolling through the canopy below your deck.",
-    facilities: ["Free Wi-Fi", "Breakfast Included", "Forest Dining"],
+    facilities: ["Free Wi-Fi", "Restaurant", "Mountain View"],
     specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
@@ -520,8 +521,8 @@ export const accommodations = [
     _id: 7,
     id: "doi-mist-mountain-lodge",
     name: "Doi Mist Mountain Lodge",
-    category: "B&B",
-    categories: ["B&B"],
+    category: "Bed & Breakfast",
+    categories: ["Bed & Breakfast"],
     region: "north",
     city: "Mae Hong Son",
     district: "Pai",
@@ -533,7 +534,7 @@ export const accommodations = [
     basePrice: 7500,
     description: "Perched on a ridge above the Pai valley, this timber lodge wakes to a sea of morning mist rolling between the hills.",
     descriptionExtra: "Floor-to-ceiling windows frame the valley from every room, with a wraparound deck built for slow mountain mornings.",
-    facilities: ["Free Wi-Fi", "Breakfast Included", "Mountain View"],
+    facilities: ["Free Wi-Fi", "Restaurant", "Mountain View"],
     specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
@@ -602,7 +603,7 @@ export const accommodations = [
     basePrice: 6800,
     description: "Traditional northern architecture meets serene Kok River frontage, featuring handcrafted teak furnishings and landscaped gardens.",
     descriptionExtra: "Every detail honors Lanna craftsmanship — woven textiles, carved lintels and a quiet courtyard courtyard shaded by rain trees.",
-    facilities: ["Free Wi-Fi", "River View", "Pool"],
+    facilities: ["Free Wi-Fi", "River View", "Swimming Pool"],
     specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
@@ -658,8 +659,8 @@ export const accommodations = [
     _id: 9,
     id: "isan-ricefield-homestay",
     name: "Isan Ricefield Heritage Homestay",
-    category: "B&B",
-    categories: ["B&B"],
+    category: "Bed & Breakfast",
+    categories: ["Bed & Breakfast"],
     region: "isan",
     city: "Ubon Ratchathani",
     district: "Warin Chamrap",
@@ -671,7 +672,7 @@ export const accommodations = [
     basePrice: 4200,
     description: "Elevated teak wood pavilions surrounded by emerald paddies, offering an authentic glimpse of rural northeast living.",
     descriptionExtra: "Participate in morning sticky rice rituals, cycle quiet village lanes and fall asleep to the gentle chorus of the fields.",
-    facilities: ["Free Wi-Fi", "Breakfast Included", "Cooking Class"],
+    facilities: ["Free Wi-Fi", "Restaurant", "Room Service"],
     specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
@@ -740,7 +741,7 @@ export const accommodations = [
     basePrice: 5600,
     description: "Boutique villas right on the edge of the mighty Mekong, watching local longtail boats drift toward sunset over Laos.",
     descriptionExtra: "An open-air riverside pavilion serves fresh Mekong fish prepared with local herbs as the border lights flicker across the water.",
-    facilities: ["Free Wi-Fi", "River View", "Pool"],
+    facilities: ["Free Wi-Fi", "River View", "Swimming Pool"],
     specialOptions: ["Breakfast Included", "Free Cancellation"],
     rooms: [
       {
@@ -809,7 +810,7 @@ export const accommodations = [
     basePrice: 11000,
     description: "Tuscan-inspired private stone villas tucked between rolling grapevines with cool mountain breezes year-round.",
     descriptionExtra: "Private wine tastings on your terrace, outdoor fireplace for chilly evenings, and waking to mist over the vines.",
-    facilities: ["Free Wi-Fi", "Wine Tasting", "Pool", "Spa"],
+    facilities: ["Free Wi-Fi", "Restaurant", "Swimming Pool", "Spa"],
     specialOptions: ["Breakfast Included", "Free Cancellation", "Private Pool"],
     rooms: [
       {
@@ -878,7 +879,7 @@ export const accommodations = [
     basePrice: 18500,
     description: "Iconic pavilions set within a coconut grove overlooking the Andaman Sea, setting the global standard for secluded coastal luxury.",
     descriptionExtra: "Private black-tiled swimming pool, direct steps to Pansea Beach's secluded cove and a holistic wellness centre.",
-    facilities: ["Free Wi-Fi", "Pool", "Spa", "Gym", "Beach Access"],
+    facilities: ["Free Wi-Fi", "Swimming Pool", "Spa", "Gym", "Beach Access"],
     specialOptions: ["Breakfast Included", "Free Cancellation", "Private Pool", "Beachfront"],
     rooms: [
       {
@@ -947,7 +948,7 @@ export const accommodations = [
     basePrice: 13500,
     description: "Accessible only by sea, these cliffside pavilions sit wedged between towering limestone karsts and turquoise Andaman waters.",
     descriptionExtra: "Listen to the gentle slap of waves against the rocks below while watching rock climbers scale the sheer limestone faces.",
-    facilities: ["Free Wi-Fi", "Pool", "Beach Access", "Spa"],
+    facilities: ["Free Wi-Fi", "Swimming Pool", "Beach Access", "Spa"],
     specialOptions: ["Breakfast Included", "Free Cancellation", "Beachfront"],
     rooms: [
       {
@@ -1016,7 +1017,7 @@ export const accommodations = [
     basePrice: 17200,
     description: "Hillside pool villas cascading down a private bay with uninterrupted views across the Gulf of Thailand.",
     descriptionExtra: "Surrounded by tropical gardens and fruit orchards, every villa offers an infinity-edge pool that merges with the horizon.",
-    facilities: ["Free Wi-Fi", "Pool", "Beach Access", "Spa", "Gym"],
+    facilities: ["Free Wi-Fi", "Swimming Pool", "Beach Access", "Spa", "Gym"],
     specialOptions: ["Breakfast Included", "Free Cancellation", "Private Pool", "Beachfront"],
     rooms: [
       {
@@ -1070,10 +1071,255 @@ export const accommodations = [
 
 ];
 
+const TOP_TOURIST_SLUGS = new Set([
+  // North (3)
+  "chiang-mai", "chiang-rai", "nan",
+  // Central (3)
+  "bangkok", "phra-nakhon-si-ayutthaya", "nonthaburi",
+  // Isan (3)
+  "nakhon-ratchasima", "khon-kaen", "udon-thani",
+  // South (3)
+  "phuket", "surat-thani", "krabi",
+  // East (3)
+  "chonburi", "rayong", "trat",
+  // West (3)
+  "kanchanaburi", "prachuap-khiri-khan", "phetchaburi"
+]);
+
+const COASTAL_SLUGS = new Set([
+  "phuket", "surat-thani", "krabi", "chonburi", "rayong", "trat",
+  "prachuap-khiri-khan", "phetchaburi", "chanthaburi", "ranong",
+  "phang-nga", "trang", "satun", "chumphon", "nakhon-si-thammarat",
+  "songkhla", "pattani", "narathiwat"
+]);
+
+const RIVERSIDE_SLUGS = new Set([
+  "bangkok", "phra-nakhon-si-ayutthaya", "nonthaburi", "pathum-thani",
+  "kanchanaburi", "nong-khai", "nakhon-phanom", "mukdahan",
+  "ubon-ratchathani", "bueng-kan", "chiang-rai", "samut-songkhram"
+]);
+
+const MOUNTAIN_SLUGS = new Set([
+  "chiang-mai", "chiang-rai", "nan", "mae-hong-son", "lampang",
+  "lamphun", "phrae", "phayao", "uttaradit", "phetchabun", "loei",
+  "nakhon-ratchasima", "kanchanaburi", "tak"
+]);
+
+const photoPool = [
+  "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&w=800&q=80",
+  "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=800&q=80"
+];
+
+// 20 Tiered configurations for top tourist provinces (6 balanced categories)
+const TIER_TEMPLATES_20 = [
+  { price: 590, cat: "Guest House", nameSuffix: "Cozy Traveler Guesthouse", sub: "Guesthouse" },
+  { price: 650, cat: "Bed & Breakfast", nameSuffix: "Garden Heritage Bed & Breakfast", sub: "Bed & Breakfast" },
+  { price: 750, cat: "Guest House", nameSuffix: "Old Town Heritage Guesthouse", sub: "Guesthouse" },
+  { price: 790, cat: "Budget Hotel", nameSuffix: "Express Budget Inn", sub: "Budget Hotel" },
+  { price: 850, cat: "Bed & Breakfast", nameSuffix: "Warm Morning Bed & Breakfast", sub: "Bed & Breakfast" },
+  { price: 950, cat: "Guest House", nameSuffix: "Boutique Eco Guesthouse", sub: "Guesthouse" },
+  { price: 990, cat: "Budget Hotel", nameSuffix: "City Smart Budget Hotel", sub: "Budget Hotel" },
+  { price: 1150, cat: "Bed & Breakfast", nameSuffix: "Charming Villa Bed & Breakfast", sub: "Bed & Breakfast" },
+  { price: 1290, cat: "Budget Hotel", nameSuffix: "Comfort Urban Budget Hotel", sub: "Budget Hotel" },
+  { price: 1590, cat: "Guest House", nameSuffix: "Riverside Traditional Guesthouse", sub: "Guesthouse" },
+  { price: 1890, cat: "Luxury Hotel", nameSuffix: "Grand Premier Luxury Hotel", sub: "Luxury Hotel" },
+  { price: 2200, cat: "Bed & Breakfast", nameSuffix: "Colonial Manor Bed & Breakfast", sub: "Bed & Breakfast" },
+  { price: 2400, cat: "Luxury Resort", nameSuffix: "Scenic Garden Luxury Resort", sub: "Luxury Resort" },
+  { price: 2890, cat: "Luxury Hotel", nameSuffix: "Panorama Suites Luxury Hotel", sub: "Luxury Hotel" },
+  { price: 3400, cat: "Private Villa", nameSuffix: "Tropical Haven Private Villa", sub: "Private Villa" },
+  { price: 3900, cat: "Luxury Resort", nameSuffix: "Valley Breeze Wellness Luxury Resort", sub: "Luxury Resort" },
+  { price: 4500, cat: "Luxury Hotel", nameSuffix: "Executive Suites Luxury Hotel", sub: "Luxury Hotel" },
+  { price: 5400, cat: "Private Villa", nameSuffix: "Cliffside Sunset Private Villa", sub: "Private Villa" },
+  { price: 6800, cat: "Luxury Resort", nameSuffix: "Grand Sanctuary Luxury Resort", sub: "Luxury Resort" },
+  { price: 8500, cat: "Private Villa", nameSuffix: "Signature Lagoon Private Villa", sub: "Private Villa" }
+];
+
+// Minor provinces alternating 3-tiered configurations
+const TIER_3_CONFIGS = [
+  // A: Guest House, Budget Hotel, Luxury Resort
+  [
+    { price: 590, cat: "Guest House", nameSuffix: "Cozy Town Guesthouse", sub: "Guesthouse" },
+    { price: 890, cat: "Budget Hotel", nameSuffix: "City Express Budget Hotel", sub: "Budget Hotel" },
+    { price: 1690, cat: "Luxury Resort", nameSuffix: "Riverside Nature Luxury Resort", sub: "Luxury Resort" }
+  ],
+  // B: Bed & Breakfast, Luxury Hotel, Private Villa
+  [
+    { price: 590, cat: "Bed & Breakfast", nameSuffix: "Cozy Heritage Bed & Breakfast", sub: "Bed & Breakfast" },
+    { price: 1290, cat: "Luxury Hotel", nameSuffix: "City Center Luxury Hotel", sub: "Luxury Hotel" },
+    { price: 1890, cat: "Private Villa", nameSuffix: "Garden View Private Villa", sub: "Private Villa" }
+  ]
+];
+
+function normalizeCity(str) {
+  const s = (str || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (s === "ayutthaya" || s.includes("ayutthaya")) return "phranakhonsiayutthaya";
+  return s;
+}
+
+function generateAllAccommodations() {
+  let currentId = 15;
+  const all = [...curatedAccommodations];
+
+  let provIndex = 0;
+  for (const prov of provinces) {
+    const isTop = TOP_TOURIST_SLUGS.has(prov.slug);
+    const targetCount = isTop ? 20 : 3;
+
+    const existingForProv = curatedAccommodations.filter(acc => {
+      const accCity = normalizeCity(acc.location.city);
+      const provName = normalizeCity(prov.name_en);
+      return accCity.includes(provName) || provName.includes(accCity);
+    });
+
+    const needed = targetCount - existingForProv.length;
+    const templates = isTop ? TIER_TEMPLATES_20 : TIER_3_CONFIGS[provIndex % TIER_3_CONFIGS.length];
+    if (!isTop) provIndex++;
+
+    const isCoastal = COASTAL_SLUGS.has(prov.slug);
+    const isRiverside = RIVERSIDE_SLUGS.has(prov.slug);
+    const isMountain = MOUNTAIN_SLUGS.has(prov.slug);
+
+    for (let i = 0; i < needed; i++) {
+      const tIndex = (existingForProv.length + i) % templates.length;
+      const template = templates[tIndex];
+      const accId = currentId++;
+      const slugId = `${prov.slug}-${template.cat.toLowerCase().replace(/[^a-z0-9]/g, "-")}-${template.price}-${accId}`;
+      const name = `${prov.name_en} ${template.nameSuffix}`;
+      const photo = photoPool[(accId + i) % photoPool.length];
+
+      // Balanced Special Options:
+      // Bed & Breakfast MUST include breakfast!
+      const specialOptions = [];
+
+      const isBnB = template.cat === "Bed & Breakfast";
+      const hasBreakfast = isBnB || (accId % 10 < 6); // 100% of Bed & Breakfast + ~60% of others
+      if (hasBreakfast) specialOptions.push("Breakfast Included");
+
+      const hasFreeCancel = (accId % 10 < 7);
+      if (hasFreeCancel) specialOptions.push("Free Cancellation");
+
+      const isVillaOrHighLuxury = template.cat === "Private Villa" || template.price >= 4500;
+      if (isVillaOrHighLuxury && (accId % 3 !== 0)) {
+        specialOptions.push("Private Pool");
+      }
+
+      if (isCoastal && (accId % 2 === 0 || template.price >= 3000)) {
+        specialOptions.push("Beachfront");
+      }
+
+      // Simplified, natural facility names:
+      // Free Wi-Fi, Swimming Pool, Gym, Spa, Restaurant, Room Service, Bar, River View, Mountain View, Beach Access
+      const facilities = ["Free Wi-Fi"];
+
+      if (specialOptions.includes("Private Pool") || template.cat === "Private Villa" || template.cat === "Luxury Resort" || template.price >= 2000) {
+        facilities.push("Swimming Pool");
+      }
+      if (template.price >= 1800 || (accId % 4 === 0)) {
+        facilities.push("Spa");
+      }
+      if (template.price >= 1000 || template.cat === "Luxury Hotel" || template.cat === "Budget Hotel") {
+        facilities.push("Gym");
+      }
+      if (template.price >= 1200 || isBnB) {
+        facilities.push("Restaurant");
+      }
+      if (template.price >= 3500 || template.cat === "Luxury Hotel") {
+        facilities.push("Room Service");
+      }
+      if (template.cat === "Luxury Hotel" || template.price >= 2500) {
+        facilities.push("Bar");
+      }
+      if (isRiverside && (accId % 2 === 0 || template.nameSuffix.includes("Riverside"))) {
+        facilities.push("River View");
+      }
+      if (isMountain && (accId % 2 === 0 || template.nameSuffix.includes("Valley") || template.nameSuffix.includes("Mountain"))) {
+        facilities.push("Mountain View");
+      }
+      if (isCoastal && (specialOptions.includes("Beachfront") || accId % 2 === 0)) {
+        facilities.push("Beach Access");
+      }
+
+      all.push({
+        _id: accId,
+        id: slugId,
+        name,
+        category: template.cat,
+        categories: [template.cat, template.sub],
+        region: prov.region,
+        description: `Experience comfortable and authentic hospitality in ${prov.name_en} (${prov.name_th}). Conveniently located near central landmarks with warm service and relaxing accommodations.`,
+        descriptionExtra: `Ideal for couples, solo travelers, and families visiting ${prov.name_en}.`,
+        location: {
+          city: prov.name_en,
+          district: "Mueang",
+          address_label: `${prov.name_en}, Thailand`,
+          map_coordinates: {
+            lat: Number((13.0 + (accId % 50) * 0.1).toFixed(4)),
+            lng: Number((99.0 + (accId % 40) * 0.1).toFixed(4))
+          },
+          nearby_landmarks: [
+            { name: `${prov.name_en} City Center`, distance: "1.2 km" },
+            { name: `${prov.name_en} Night Bazaar`, distance: "2.0 km" }
+          ]
+        },
+        rating_avg: Number((4.2 + (accId % 9) * 0.1).toFixed(1)),
+        total_reviews: 15 + (accId * 7) % 180,
+        facilities,
+        special_options: specialOptions,
+        base_price_per_night: template.price,
+        rooms: [
+          {
+            room_type_id: `rm-${accId}-01`,
+            name: `${name} Standard Room`,
+            bed_type: "1 Queen Bed",
+            max_guests: { adults: 2, children: 1 },
+            price_per_night: template.price,
+            available_quantity: 4
+          },
+          {
+            room_type_id: `rm-${accId}-02`,
+            name: `${name} Deluxe Suite`,
+            bed_type: "1 King Bed",
+            max_guests: { adults: 2, children: 2 },
+            price_per_night: Math.round(template.price * 1.3),
+            available_quantity: 2
+          }
+        ],
+        pictures: [
+          photo,
+          photoPool[(accId + 1) % photoPool.length],
+          photoPool[(accId + 2) % photoPool.length]
+        ],
+        policies: {
+          cancellation_policy: "Free cancellation up to 48 hours before check-in",
+          check_in_time: "13:00",
+          check_out_time: "12:00"
+        }
+      });
+    }
+  }
+
+  return all;
+}
+
+export const accommodations = generateAllAccommodations();
+
 async function seedAccommodations() {
   await Accommodation.deleteMany({});
   await Accommodation.insertMany(accommodations);
-  console.log(`Accommodation seed completed ✅ (${accommodations.length} accommodations)`);
+  console.log(`Accommodation seed completed ✅ (${accommodations.length} accommodations across ${provinces.length} provinces)`);
 }
 
 export default seedAccommodations;

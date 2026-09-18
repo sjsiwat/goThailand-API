@@ -23,7 +23,9 @@ const cars = [
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
       "Don Mueang Airport (DMK)",
-      "Chiang Mai International Airport (CNX)"
+      "Chiang Mai International Airport (CNX)",
+      "Nan Nakhon Airport (NNT)",
+      "Phra Nakhon Si Ayutthaya Heritage Center"
     ],
     isAvailable: true,
   },
@@ -49,7 +51,9 @@ const cars = [
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
       "Don Mueang Airport (DMK)",
-      "Phuket International Airport (HKT)"
+      "Phuket International Airport (HKT)",
+      "Krabi International Airport (KBV)",
+      "Surat Thani Airport (URT) / Koh Samui"
     ],
     isAvailable: true,
   },
@@ -75,6 +79,9 @@ const cars = [
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
       "Chiang Mai International Airport (CNX)",
+      "Chiang Rai International Airport (CEI)",
+      "Nakhon Ratchasima / Khao Yai",
+      "Kanchanaburi City Center",
       "Phuket International Airport (HKT)"
     ],
     isAvailable: true,
@@ -100,7 +107,10 @@ const cars = [
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
-      "Chiang Mai International Airport (CNX)"
+      "Don Mueang Airport (DMK)",
+      "Chiang Mai International Airport (CNX)",
+      "Khon Kaen Airport (KKC)",
+      "Udon Thani International Airport (UTH)"
     ],
     isAvailable: true,
   },
@@ -125,7 +135,10 @@ const cars = [
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
-      "Don Mueang Airport (DMK)"
+      "Don Mueang Airport (DMK)",
+      "Pattaya / U-Tapao Airport (UTP)",
+      "Rayong City Center",
+      "Hua Hin Airport (HHQ)"
     ],
     isAvailable: true,
   },
@@ -150,7 +163,10 @@ const cars = [
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
-      "Phuket International Airport (HKT)"
+      "Phuket International Airport (HKT)",
+      "Chiang Mai International Airport (CNX)",
+      "Pattaya / U-Tapao Airport (UTP)",
+      "Nakhon Ratchasima / Khao Yai"
     ],
     isAvailable: true,
   },
@@ -175,7 +191,9 @@ const cars = [
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
-      "Phuket International Airport (HKT)"
+      "Phuket International Airport (HKT)",
+      "Hua Hin Airport (HHQ)",
+      "Pattaya / U-Tapao Airport (UTP)"
     ],
     isAvailable: true,
   },
@@ -200,7 +218,10 @@ const cars = [
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
-      "Chiang Mai International Airport (CNX)"
+      "Don Mueang Airport (DMK)",
+      "Chiang Mai International Airport (CNX)",
+      "Khon Kaen Airport (KKC)",
+      "Trat Airport (TDX) / Koh Chang"
     ],
     isAvailable: true,
   }
