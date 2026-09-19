@@ -22,15 +22,56 @@ const provinceSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    slogan: { type: String, trim: true, default: "" },
+    summary: { type: String, trim: true, default: "" },
+    highlights: { type: [String], default: [] },
+    signatureFood: { type: [String], default: [] },
+    unseenGems: { type: [String], default: [] },
+    bestMonths: { type: [String], default: [] },
+    travelTips: { type: String, trim: true, default: "" },
+    vibes: { type: [String], default: [] },
     vectorData: {
+      viewBox: { type: String, default: "" },
+      width: { type: Number, default: 0 },
+      height: { type: Number, default: 0 },
       d: { type: String, default: "" },
     },
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+// Virtual: provinceId (เช่น "TH-50" หรือ "TH-10") เพื่อรองรับ Frontend เดิม
+provinceSchema.virtual("provinceId").get(function () {
+  if (this.code) {
+    return this.code.startsWith("TH-") ? this.code : `TH-${this.code}`;
+  }
+  return this.id ? `TH-${this.id}` : "";
+});
+
+// Virtual: d (พิกัด SVG path) เพื่อให้ Component เก่าและใหม่ดึง path ไปวาดได้ทันที
+provinceSchema.virtual("d").get(function () {
+  return this.vectorData?.d || "";
+});
+
+// Virtual: viewBox (อัตราส่วน SVG)
+provinceSchema.virtual("viewBox").get(function () {
+  return this.vectorData?.viewBox || "0 0 800 600";
+});
+
+// Virtual: width & height
+provinceSchema.virtual("width").get(function () {
+  return this.vectorData?.width || 800;
+});
+
+provinceSchema.virtual("height").get(function () {
+  return this.vectorData?.height || 600;
+});
 
 const Province = mongoose.model("Province", provinceSchema);
 
 export default Province;
+
