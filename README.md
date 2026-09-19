@@ -286,7 +286,7 @@ PATCH  /api/bookings/:id    # อัปเดตสถานะการจอ�
 DELETE /api/bookings/:id    # ลบหรือยกเลิกรายการจอง
 ```
 
-**Province**
+**Province** *(📖 [PROVINCE_API.md](./PROVINCE_API.md))*
 
 ```
 GET    /api/provinces       # ดึงรายการจังหวัดทั้งหมด (77 จังหวัด)
