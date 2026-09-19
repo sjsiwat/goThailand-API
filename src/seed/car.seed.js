@@ -1,5 +1,7 @@
 import Car from "../models/Car.js";
 
+const CDN_BASE = "https://raw.githubusercontent.com/sjsiwat/goThailand-API/main/public/images/cars";
+
 const cars = [
   {
     slug: "toyota-yaris",
@@ -16,9 +18,11 @@ const cars = [
     fuelType: "Petrol",
     luggageCapacity: "2 Large Bags",
     description: "Compact and fuel-efficient eco car, ideal for city driving and agile maneuverability.",
-    mainImage: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80",
+    mainImage: `${CDN_BASE}/toyota-yaris.jpg`,
     galleryImages: [
-      "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80"
+      `${CDN_BASE}/toyota-yaris.jpg`,
+      `${CDN_BASE}/toyota-yaris-rear.jpg`,
+      `${CDN_BASE}/toyota-yaris-interior.jpg`
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
@@ -44,9 +48,11 @@ const cars = [
     fuelType: "Petrol",
     luggageCapacity: "3 Large Bags",
     description: "Comfortable and stylish sedan featuring a responsive turbocharged engine and spacious interior.",
-    mainImage: "https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=800&q=80",
+    mainImage: `${CDN_BASE}/honda-city.jpg`,
     galleryImages: [
-      "https://images.unsplash.com/photo-1590362891991-f776e747a588?auto=format&fit=crop&w=800&q=80"
+      `${CDN_BASE}/honda-city.jpg`,
+      `${CDN_BASE}/honda-city-rear.jpg`,
+      `${CDN_BASE}/honda-city-interior.jpg`
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
@@ -72,9 +78,11 @@ const cars = [
     fuelType: "Diesel",
     luggageCapacity: "4 Large Bags",
     description: "Powerful and rugged 7-seat SUV engineered for family road trips and challenging terrains across Thailand.",
-    mainImage: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80",
+    mainImage: `${CDN_BASE}/toyota-fortuner.jpg`,
     galleryImages: [
-      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=800&q=80"
+      `${CDN_BASE}/toyota-fortuner.jpg`,
+      `${CDN_BASE}/toyota-fortuner-rear.jpg`,
+      `${CDN_BASE}/toyota-fortuner-interior.jpg`
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
@@ -101,9 +109,10 @@ const cars = [
     fuelType: "Petrol",
     luggageCapacity: "2 Large Bags",
     description: "Sporty hatchback offering dynamic handling, high fuel efficiency, and a refined cockpit.",
-    mainImage: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&q=80",
+    mainImage: `${CDN_BASE}/mazda-2.jpg`,
     galleryImages: [
-      "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&q=80"
+      `${CDN_BASE}/mazda-2.jpg`,
+      `${CDN_BASE}/mazda-2-rear.jpg`
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
@@ -129,9 +138,10 @@ const cars = [
     fuelType: "Petrol",
     luggageCapacity: "3 Large Bags",
     description: "Modern eco-sedan equipped with comprehensive 360 safety shield features and comfortable rear legroom.",
-    mainImage: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80",
+    mainImage: `${CDN_BASE}/nissan-almera.jpg`,
     galleryImages: [
-      "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80"
+      `${CDN_BASE}/nissan-almera.jpg`,
+      `${CDN_BASE}/nissan-almera-rear.jpg`
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
@@ -157,9 +167,10 @@ const cars = [
     fuelType: "Diesel",
     luggageCapacity: "6 Large Bags",
     description: "Premium luxury van with Captain executive seats, top-tier comfort for VIP travels and large groups.",
-    mainImage: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80",
+    mainImage: `${CDN_BASE}/toyota-majesty.jpg`,
     galleryImages: [
-      "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=800&q=80"
+      `${CDN_BASE}/toyota-majesty.jpg`,
+      `${CDN_BASE}/toyota-majesty-interior.jpg`
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
@@ -185,9 +196,10 @@ const cars = [
     fuelType: "Hybrid",
     luggageCapacity: "3 Large Bags",
     description: "Executive luxury plug-in hybrid sedan offering exhilarating performance, silence, and prestige.",
-    mainImage: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80",
+    mainImage: `${CDN_BASE}/bmw-5-series.jpg`,
     galleryImages: [
-      "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80"
+      `${CDN_BASE}/bmw-5-series.jpg`,
+      `${CDN_BASE}/bmw-5-series-interior.jpg`
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
@@ -212,9 +224,10 @@ const cars = [
     fuelType: "Electric",
     luggageCapacity: "3 Large Bags",
     description: "100% Electric EV SUV equipped with Blade Battery, high-tech interior, and 480km driving range.",
-    mainImage: "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80",
+    mainImage: `${CDN_BASE}/byd-atto-3.jpg`,
     galleryImages: [
-      "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80"
+      `${CDN_BASE}/byd-atto-3.jpg`,
+      `${CDN_BASE}/byd-atto-3-interior.jpg`
     ],
     availableLocations: [
       "Bangkok (BKK) Suvarnabhumi Airport",
