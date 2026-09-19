@@ -56,7 +56,46 @@ const guideSchema = new mongoose.Schema({
   specialized_services: [specializedServiceSchema],
 
 }, { 
-  timestamps: true 
+  timestamps: true,
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
+});
+
+// Virtuals for frontend compatibility (Meng x Yok component mappings)
+guideSchema.virtual('id').get(function () {
+  return this._id.toHexString();
+});
+
+guideSchema.virtual('pricePerDay').get(function () {
+  return this.daily_fee;
+});
+
+guideSchema.virtual('rating').get(function () {
+  return this.rating_avg;
+});
+
+guideSchema.virtual('reviews').get(function () {
+  return this.total_reviews;
+});
+
+guideSchema.virtual('location').get(function () {
+  return this.province || this.base_location;
+});
+
+guideSchema.virtual('bio').get(function () {
+  return this.description;
+});
+
+guideSchema.virtual('languages').get(function () {
+  return this.language;
+});
+
+guideSchema.virtual('image').get(function () {
+  return this.guide_photo;
+});
+
+guideSchema.virtual('specialties').get(function () {
+  return (this.specialized_services || []).map(s => s.title);
 });
 
 const Guide = mongoose.model("Guide", guideSchema);

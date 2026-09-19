@@ -14,10 +14,27 @@ router.post("/", async (req, res) => {
   }
 });
 
-// 2. READ: ดึงรายการไกด์ทั้งหมด
+// 2. READ: ดึงรายการไกด์ทั้งหมด (รองรับ filter ตาม province, status, search)
 router.get("/", async (req, res) => {
   try {
-    const guides = await Guide.find();
+    const { province, status, search } = req.query;
+    const filter = {};
+
+    if (province) {
+      filter.province = { $regex: new RegExp(province, "i") };
+    }
+    if (status) {
+      filter.status = status;
+    }
+    if (search) {
+      filter.$or = [
+        { name: { $regex: new RegExp(search, "i") } },
+        { nickname: { $regex: new RegExp(search, "i") } },
+        { province: { $regex: new RegExp(search, "i") } }
+      ];
+    }
+
+    const guides = await Guide.find(filter);
     res.status(200).json(guides);
   } catch (error) {
     res.status(500).json({ message: error.message });

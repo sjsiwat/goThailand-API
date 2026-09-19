@@ -2,15 +2,16 @@
 
 เอกสารสรุปโครงสร้างข้อมูล (Data Schemas) ทั้งหมดของระบบ **GoThailand API** เชื่อมต่อกับ MongoDB Atlas
 
-> ⚠️ **สถานะเอกสาร:** ยังเหลือส่วนข้อมูล **User** และ **Guide** ที่ยังไม่ได้เขียนสรุป Schema ในเอกสารนี้ — รอเพิ่มเติมภายหลัง
+> ⚠️ **สถานะเอกสาร:** ยังเหลือส่วนข้อมูล **User** ที่ยังไม่ได้เขียนสรุป Schema ในเอกสารนี้ — ข้อมูล Accommodation, Car, Booking, Province และ Guide เสร็จสมบูรณ์แล้ว
 
 ## สารบัญ
 
 1. [Accommodation Schema (ข้อมูลที่พัก)](#1-accommodation-schema-ข้อมูลที่พัก)
 2. [Car & Booking Schema (ข้อมูลรถเช่าและการจอง)](#2-car--booking-schema-ข้อมูลรถเช่าและการจอง)
 3. [Province Schema (ข้อมูล 77 จังหวัด)](#3-province-schema-ข้อมูล-77-จังหวัด)
-4. [สรุป API Endpoints](#4-สรุป-api-endpoints-ที่เกี่ยวข้อง)
-5. [ส่วนที่ยังไม่เสร็จ](#5-ส่วนที่ยังไม่เสร็จ)
+4. [Guide Schema (ข้อมูลมัคคุเทศก์ / ไกด์นำเที่ยว)](#4-guide-schema-ข้อมูลมัคคุเทศก์--ไกด์นำเที่ยว)
+5. [สรุป API Endpoints](#5-สรุป-api-endpoints-ที่เกี่ยวข้อง)
+6. [ส่วนที่ยังไม่เสร็จ](#6-ส่วนที่ยังไม่เสร็จ)
 
 ---
 
@@ -311,7 +312,156 @@ Schema สำหรับเก็บประวัติการทำรา�
 
 ---
 
-## 4. สรุป API Endpoints ที่เกี่ยวข้อง
+---
+
+## 4. Guide Schema (ข้อมูลมัคคุเทศก์ / ไกด์นำเที่ยว)
+
+โมเดลสำหรับจัดเก็บและค้นหาข้อมูลไกด์นำเที่ยว (`guides` collection) อ้างอิงมาตรฐานกรมการท่องเที่ยว มีใบอนุญาตถูกต้อง และระบุความเชี่ยวชาญเฉพาะด้าน (`specialized_services`)
+
+> 💡 **สถิติข้อมูลจำลอง (Seed Data):**
+> - **18 จังหวัดท่องเที่ยวหลัก (ภาคละ 3 จังหวัด):**
+>   - **ภาคเหนือ:** Chiang Mai (6), Chiang Rai (6), Nan (5)
+>   - **ภาคกลาง:** Bangkok (6), Phra Nakhon Si Ayutthaya (6), Nonthaburi (5)
+>   - **ภาคอีสาน:** Nakhon Ratchasima (6), Khon Kaen (6), Udon Thani (5)
+>   - **ภาคใต้:** Phuket (6), Surat Thani (6), Krabi (5)
+>   - **ภาคตะวันออก:** Chonburi (6), Rayong (5), Trat (5)
+>   - **ภาคตะวันตก:** Kanchanaburi (6), Prachuap Khiri Khan (5), Phetchaburi (5)
+> - **จำนวนไกด์:** เกลี่ยเฉลี่ยจังหวัดละ 5–6 คน ครบทุกจังหวัดหลัก รวมทั้งสิ้น **100 คน**
+> - **ใบอนุญาต:** รหัสมาตรฐานกรมการท่องเที่ยว `TG-[รหัสจังหวัด]-[ลำดับ]` เช่น `TG-50-1001`
+> - **ความเชี่ยวชาญ:** มีบริการเสริมเฉพาะทาง (`specialized_services`) เช่น เดินทัวร์วัดโบราณล้านนา, ล่องเรือชมทะเลบัวแดง, ชิมสตรีทฟู้ดยาวราช, ซาฟารีส่องสัตว์เขาใหญ่
+
+### 4.1 Main Schema (`Guide`)
+
+| ฟิลด์ (Field) | ชนิดข้อมูล (Type) | บังคับ (Required) | ค่าเริ่มต้น / ข้อจำกัด | รายละเอียด |
+| :--- | :--- | :---: | :--- | :--- |
+| `_id` | `ObjectId` | ❌ | Gen อัตโนมัติ | รหัส Primary Key ของ MongoDB |
+| `name` | `String` | ✅ | Trim | ชื่อ-นามสกุลจริงของมัคคุเทศก์ |
+| `nickname` | `String` | ❌ | Trim | ชื่อเล่น เช่น `"Chai"`, `"Ploy"` |
+| `gender` | `String` | ❌ | **Enum:** `'Male'`, `'Female'`, `'Other'`, `'Not Specified'` | เพศสภาพ |
+| `guide_photo` | `String` | ❌ | Default: `'default_avatar.jpg'` | รูปโปรไฟล์มัคคุเทศก์ |
+| `phone` | `String` | ✅ | เช่น `"081-234-5678"` | เบอร์โทรศัพท์ติดต่อ |
+| `email` | `String` | ❌ | Lowercase, Trim | อีเมลติดต่อ |
+| `line_id` | `String` | ❌ | Trim | LINE ID สำหรับติดต่อ |
+| `province` | `String` | ❌ | เช่น `"Chiang Mai"`, `"Phuket"` | จังหวัดประจำการหลัก (อ้างอิงตรงกับ `provinces.name_en`) |
+| `daily_fee` | `Number` | ❌ | Min: 0 (เช่น `1600`–`3000`) | ค่าบริการมาตรฐานรายวัน (8 ชั่วโมง) THB |
+| `overtime_rate_perhour` | `Number` | ❌ | Min: 0 (เช่น `240`–`450`) | อัตราค่าบริการล่วงเวลาต่อชั่วโมง THB |
+| `license_number` | `String` | ✅ | Unique (เช่น `"TG-50-1001"`) | เลขที่ใบอนุญาตมัคคุเทศก์ |
+| `license_category` | `String` | ❌ | **Enum:** `'General'`, `'Specific Region'`, `'Local'` | ประเภทใบอนุญาต |
+| `scope_type` | `String` | ❌ | เช่น `"Inbound & Domestic"` | ขอบเขตประเภทการนำเที่ยว |
+| `scope_description` | `String` | ❌ | - | คำอธิบายสิทธิ์การนำเที่ยว |
+| `permitted_regions` | `[String]` | ❌ | เช่น `["Northern Thailand"]` | ภูมิภาคที่ได้รับอนุญาต |
+| `issue_date` | `Date` | ❌ | - | วันที่ออกใบอนุญาต |
+| `expiry_date` | `Date` | ❌ | - | วันหมดอายุใบอนุญาต |
+| `verified` | `Boolean` | ❌ | Default: `false` | สถานะการตรวจสอบยืนยันเอกสาร |
+| `language` | `[String]` | ❌ | Default: `["Thai"]` | ภาษาที่สื่อสารได้ เช่น `["Thai", "English", "Mandarin"]` |
+| `service_areas` | `[String]` | ❌ | รายชื่อสถานที่ เช่น `["Doi Suthep", "Wat Chedi Luang"]` | ขอบเขตพื้นที่และจุดนำเที่ยวหลัก |
+| `base_location` | `String` | ❌ | Trim | สถานที่ฐานปฏิบัติการ |
+| `max_guest` | `Number` | ❌ | Min: 1 (เช่น `8`–`16`) | จำนวนลูกทัวร์สูงสุดที่รับได้ต่อกรุ๊ป |
+| `guide_service_duration_per_day` | `Number` | ❌ | Default: `8` | ระยะเวลาให้บริการมาตรฐานต่อวัน (ชั่วโมง) |
+| `status` | `String` | ❌ | **Enum:** `'Available'`, `'Busy'`, `'Inactive'` (Default: `'Available'`) | สถานะความพร้อมให้บริการ |
+| `rating_avg` | `Number` | ❌ | Default: `0` (Min: 0, Max: 5) | คะแนนรีวิวเฉลี่ย |
+| `total_reviews` | `Number` | ❌ | Default: `0` (Min: 0) | จำนวนรีวิวทั้งหมด |
+| `years_experience` | `Number` | ❌ | Default: `0` (Min: 0) | ประสบการณ์การเป็นมัคคุเทศก์ (ปี) |
+| `total_travelers` | `Number` | ❌ | Default: `0` (Min: 0) | จำนวนนักท่องเที่ยวที่เคยให้บริการ |
+| `description` | `String` | ❌ | - | ประวัติและคำแนะนำตัวของมัคคุเทศก์ |
+| `specialized_services` | `[Object]` | ❌ | Array of Sub-docs | บริการพิเศษเฉพาะทาง (ดูหัวข้อ 4.2) |
+
+### 4.2 Specialized Services Sub-document (`specialized_services`)
+
+| ฟิลด์ (Field) | ชนิดข้อมูล (Type) | บังคับ (Required) | รายละเอียด |
+| :--- | :--- | :---: | :--- |
+| `service_id` | `String` | ✅ | รหัสประจำบริการพิเศษ เช่น `"svc-50-1-1"` |
+| `title` | `String` | ✅ | ชื่อโปรแกรม/บริการ เช่น `"Lanna Heritage & Ancient Temples"` |
+| `description` | `String` | ✅ | รายละเอียดโปรแกรมและไฮไลต์กิจกรรม |
+| `image_url` | `String` | ❌ | รูปภาพประกอบบริการ |
+
+### 4.3 Virtual Fields (ฟิลด์เสมือนสำหรับเชื่อมต่อ Frontend)
+
+| Virtual Field | แมปมาจากฟิลด์จริง (Source) | ชนิดข้อมูล | จุดประสงค์ / ประโยชน์ |
+| :--- | :--- | :---: | :--- |
+| `id` | `_id.toHexString()` | `String` | รองรับ Frontend ที่เรียก `guide.id` หรือใช้เป็น key |
+| `pricePerDay` | `daily_fee` | `Number` | รองรับคอมโพเนนต์การ์ดไกด์ `guide.pricePerDay` |
+| `rating` | `rating_avg` | `Number` | รองรับ `guide.rating` |
+| `reviews` | `total_reviews` | `Number` | รองรับ `guide.reviews` |
+| `location` | `province` หรือ `base_location` | `String` | รองรับการแสดงผลเมือง/จังหวัดแบบย่อ `guide.location` |
+| `bio` | `description` | `String` | รองรับคำแนะนำตัว `guide.bio` |
+| `languages` | `language` | `[String]` | รองรับการวนลูปภาษา `guide.languages` |
+| `image` | `guide_photo` | `String` | รองรับภาพโปรไฟล์ `guide.image` |
+| `specialties` | `specialized_services.map(s => s.title)` | `[String]` | คืนค่าเป็น Array ของชื่อบริการพิเศษให้แสดง Badge ได้ทันที |
+
+### 4.4 ตัวอย่าง JSON ของ Guide
+
+```json
+{
+  "_id": "6aae4929c51495ec81c1d332",
+  "id": "6aae4929c51495ec81c1d332",
+  "name": "Somchai Jaidee",
+  "nickname": "Chai",
+  "gender": "Male",
+  "guide_photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+  "phone": "081-100-1007",
+  "email": "chai.somchai@gothailand-guide.com",
+  "line_id": "@guide_chai_chia",
+  "province": "Chiang Mai",
+  "daily_fee": 1600,
+  "overtime_rate_perhour": 240,
+  "license_number": "TG-50-1001",
+  "license_category": "General",
+  "scope_type": "Inbound & Domestic",
+  "scope_description": "Certified professional tourist guide authorized for cultural, heritage, and nature tourism in Chiang Mai and Northern Thailand.",
+  "permitted_regions": ["Northern Thailand"],
+  "issue_date": "2021-01-10T00:00:00.000Z",
+  "expiry_date": "2028-01-10T00:00:00.000Z",
+  "verified": true,
+  "language": ["Thai", "English"],
+  "service_areas": [
+    "Doi Suthep",
+    "Wat Chedi Luang",
+    "Nimmanhaemin",
+    "Doi Inthanon",
+    "Sticky Waterfalls",
+    "Mae Rim Valley"
+  ],
+  "base_location": "Mueang Chiang Mai District, Chiang Mai",
+  "max_guest": 8,
+  "guide_service_duration_per_day": 8,
+  "status": "Available",
+  "rating_avg": 4.7,
+  "total_reviews": 20,
+  "years_experience": 3,
+  "total_travelers": 360,
+  "description": "Professional licensed guide based in Chiang Mai with over 3 years of expertise. Passionate about sharing authentic local culture, hidden gems, and memorable stories with travelers from all over the world.",
+  "specialized_services": [
+    {
+      "service_id": "svc-50-1-1",
+      "title": "Lanna Heritage & Ancient Temples",
+      "description": "Discover centuries-old teakwood temples, sacred chanting rituals, and ancient Lanna kingdom history.",
+      "image_url": "https://images.unsplash.com/photo-1598970434795-0c54fe7c0648?auto=format&fit=crop&w=800&q=80"
+    },
+    {
+      "service_id": "svc-50-1-2",
+      "title": "Northern Street Food & Night Bazaar",
+      "description": "Taste Khao Soi, Sai Oua sausage, and night bazaar delicacies with a local food expert.",
+      "image_url": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80"
+    }
+  ],
+  "pricePerDay": 1600,
+  "rating": 4.7,
+  "reviews": 20,
+  "location": "Chiang Mai",
+  "bio": "Professional licensed guide based in Chiang Mai with over 3 years of expertise...",
+  "languages": ["Thai", "English"],
+  "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+  "specialties": [
+    "Lanna Heritage & Ancient Temples",
+    "Northern Street Food & Night Bazaar"
+  ]
+}
+```
+
+---
+
+## 5. สรุป API Endpoints ที่เกี่ยวข้อง
 
 | Resource | Method | URL Path | Query Params / Description |
 | :--- | :---: | :--- | :--- |
@@ -320,17 +470,26 @@ Schema สำหรับเก็บประวัติการทำรา�
 | | `PATCH` | `/api/accommodations/:id` | แก้ไขข้อมูลที่พักตาม `_id` |
 | | `DELETE` | `/api/accommodations/:id` | ลบข้อมูลที่พักตาม `_id` |
 | **Cars** | `GET` | `/api/cars` | ดึงรายการรถเช่าทั้งหมด |
-| | `GET` | `/api/cars/:id` | ดึงข้อมูลรถรายคันตาม `_id` |
+| | `GET` | `/api/cars/:id` | ดึงข้อมูลรถรายคันตาม `_id` หรือ `slug` |
 | | `POST` | `/api/cars` | เพิ่มข้อมูลรถเช่าใหม่ |
 | | `PATCH` | `/api/cars/:id` | แก้ไขข้อมูลรถเช่าตาม `_id` |
 | | `DELETE` | `/api/cars/:id` | ลบข้อมูลรถเช่าตาม `_id` |
+| **Bookings** | `GET` | `/api/bookings` | ดึงประวัติรายการจองรถทั้งหมด |
+| | `GET` | `/api/bookings/:id` | ดึงข้อมูลการจองตาม `bookingReferenceId` หรือ `_id` |
+| | `POST` | `/api/bookings` | บันทึกการจองรถใหม่ (ออก Reference ID อัตโนมัติ) |
+| | `PATCH` | `/api/bookings/:id` | ปรับปรุงสถานะหรือข้อมูลการจอง |
+| | `DELETE` | `/api/bookings/:id` | ยกเลิก/ลบรายการจอง |
+| **Guides** | `GET` | `/api/guides` | ดึงรายชื่อไกด์ทั้งหมด<br>• `?province=Chiang%20Mai` กรองตามจังหวัด<br>• `?status=Available` กรองตามสถานะ<br>• `?search=Chai` ค้นหาชื่อ/ชื่อเล่น/จังหวัด |
+| | `GET` | `/api/guides/:id` | ดึงข้อมูลไกด์รายคนตาม `_id` |
+| | `POST` | `/api/guides` | เพิ่มข้อมูลมัคคุเทศก์ใหม่ |
+| | `PATCH` | `/api/guides/:id` | แก้ไขข้อมูลมัคคุเทศก์ตาม `_id` |
+| | `DELETE` | `/api/guides/:id` | ลบข้อมูลมัคคุเทศก์ตาม `_id` |
 | **Provinces** | `GET` | `/api/provinces` | ดึงข้อมูลจังหวัดทั้งหมด คืนค่า `{ success: true, count: 77, provinces }`<br>• `?region=north` หรือ `?region=เหนือ` สำหรับกรองภาค<br>• `?format=array` สำหรับรับผลลัพธ์เป็น Array |
 | | `GET` | `/api/provinces/:id` | ค้นหาจังหวัดเดี่ยวด้วยรหัส `id` (เช่น `50`) หรือ `slug` (เช่น `chiang-mai`) |
 | | `POST` | `/api/provinces` | สร้างข้อมูลจังหวัดใหม่ |
 
 ---
 
-## 5. ส่วนที่ยังไม่เสร็จ
+## 6. ส่วนที่ยังไม่เสร็จ
 
 - [ ] **User Schema** — ยังไม่ได้เขียนเอกสารสรุปโครงสร้างข้อมูล
-- [ ] **Guide Schema** — ยังไม่ได้เขียนเอกสารสรุปโครงสร้างข้อมูล
