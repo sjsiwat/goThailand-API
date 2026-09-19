@@ -8,6 +8,7 @@ import carRoutes from "./routes/car.routes.js";
 import guideRoutes from "./routes/guide.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import provinceRoutes from "./routes/province.routes.js";
+import bookingRoutes from "./routes/booking.routes.js";
 
 dotenv.config({ quiet: true });
 
@@ -21,6 +22,7 @@ app.use("/api/cars", carRoutes);
 app.use("/api/guides", guideRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/provinces", provinceRoutes);
+app.use("/api/bookings", bookingRoutes);
 
 app.get("/", (req, res) => {
   res.json({

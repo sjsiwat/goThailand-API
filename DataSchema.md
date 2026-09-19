@@ -163,6 +163,20 @@
 | `isAvailable` | `Boolean` | ❌ | Default: `true` | สถานะเปิดให้เช่า |
 | `createdAt` / `updatedAt` | `Date` | ❌ | Auto timestamps | เวลาที่สร้าง/อัปเดตข้อมูล |
 
+#### Virtual Fields (ฟิลด์เสมือนที่สร้างให้อัตโนมัติเมื่อส่ง JSON ไปยัง Frontend)
+เพื่อให้โค้ด Frontend (เช่น คอมโพเนนต์ของ Guitar: `CarCard`, `CarDetail`) ใช้งานได้ทันทีโดยไม่เกิด runtime error Mongoose Schema ได้ทำการแนบ Virtual Getters ดังนี้:
+
+| Virtual Field | แมปมาจากฟิลด์จริง (Source) | ชนิดข้อมูล | จุดประสงค์ / ประโยชน์ |
+| :--- | :--- | :---: | :--- |
+| `id` | `_id.toHexString()` | `String` | ให้ Frontend ที่เรียก `car.id` หรือใช้เป็น key ใช้งานได้ทันที |
+| `fuel` | `fuelType` | `String` | ป้องกัน error ในจุดที่เรียก `car.fuel` แทน `car.fuelType` |
+| `luggage` | `luggageCapacity` | `String` | รองรับการเรียก `car.luggage` แทน `car.luggageCapacity` |
+| `reviews` | `reviewCount` | `Number` | รองรับการเรียก `car.reviews` แทน `car.reviewCount` |
+| `gallery` | `galleryImages` | `[String]` | รองรับการเรียก `car.gallery` แทน `car.galleryImages` |
+
+> [!NOTE]
+> **API Routing (`GET /api/cars/:id`):** ฝั่ง Backend รองรับการค้นหาผ่านทั้ง MongoDB `_id` (ObjectId) และ `slug` ทำให้ Frontend สามารถเปิดหน้าดูรายละเอียดรถด้วย URL ทั้งสองรูปแบบได้ทันที
+
 ### 2.2 Booking Schema (`Booking`)
 
 Schema สำหรับเก็บประวัติการทำรายการจองรถเช่า (Checkout Flow):
@@ -191,6 +205,19 @@ Schema สำหรับเก็บประวัติการทำรา�
 | `payment` | `Object` | ❌ | `{ method: ['card','promptpay','bank'], cardName, cardNumberMasked, expiryDate, saveCardForFuture, sameAsTravelerAddress }` | ข้อมูลวิธีชำระเงิน |
 | `termsAccepted` | `Boolean` | ✅ | Default: `true` | ยอมรับข้อกำหนดและเงื่อนไข |
 | `status` | `String` | ❌ | **Enum:** `'pending'`, `'confirmed'`, `'cancelled'` (Default: `'confirmed'`) | สถานะการจอง |
+
+#### Booking API Endpoints (`/api/bookings`)
+
+| Method | Endpoint | รายละเอียด |
+| :---: | :--- | :--- |
+| `GET` | `/api/bookings` | ดึงประวัติรายการจองทั้งหมด (เรียงจากล่าสุดไปเก่าสุด) |
+| `GET` | `/api/bookings/:id` | ค้นหารายการจองด้วย `_id` หรือ `bookingReferenceId` |
+| `POST` | `/api/bookings` | บันทึกรายการจองใหม่ (รองรับทั้ง Flat Payload จากฟอร์มหน้าเว็บ และ Nested Schema มาตรฐาน) |
+| `PATCH` | `/api/bookings/:id` | อัปเดตสถานะการจอง (`status: confirmed / cancelled / pending`) |
+| `DELETE` | `/api/bookings/:id` | ลบรายการจอง |
+
+> [!TIP]
+> **Payload Compatibility (Frontend -> Backend):** Endpoint `POST /api/bookings` รองรับ Flat Payload ตรงตามที่ Guitar ออกแบบไว้ในฟอร์ม Checkout (เช่น `fullName`, `email`, `driverName`, `licenseNumber`, `pickupReturn`, `rentalPrice` ฯลฯ) โดย Backend จะแปลงและแมปลง Subdocuments (`traveler`, `driver`, `pricing`, `payment`) ให้อัตโนมัติ พร้อมทั้งสร้างรหัสใบจอง `bookingReferenceId` ให้ทันที
 
 ### 2.3 ตัวอย่าง JSON ของ Car
 

@@ -41,7 +41,33 @@ const carSchema = new mongoose.Schema({
   // สถานที่และสถานะ
   availableLocations: [{ type: String }],               
   isAvailable: { type: Boolean, default: true }
-}, { timestamps: true });
+}, { 
+  timestamps: true,
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
+});
+
+// Virtual field for `id` so frontend calling `car.id` gets string id
+carSchema.virtual('id').get(function () {
+  return this._id.toHexString();
+});
+
+// Virtual aliases to support frontend property names seamlessly
+carSchema.virtual('fuel').get(function () {
+  return this.fuelType;
+});
+
+carSchema.virtual('luggage').get(function () {
+  return this.luggageCapacity;
+});
+
+carSchema.virtual('reviews').get(function () {
+  return this.reviewCount;
+});
+
+carSchema.virtual('gallery').get(function () {
+  return this.galleryImages;
+});
 
 
 // 2. BOOKING SCHEMA (สำหรับ Screen 9, Screen 10, และ Screen 11)
@@ -72,8 +98,11 @@ const bookingSchema = new mongoose.Schema({
     required: true, 
     default: "Bangkok (BKK) Suvarnabhumi Airport" 
   },
-  pickupDate: { type: Date, required: true },
-  dropoffDate: { type: Date, required: true },
+  pickupDate: { type: Date, default: Date.now },
+  dropoffDate: { 
+    type: Date, 
+    default: () => new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) 
+  },
   pickupTime: { type: String, default: "10:00 AM" },
   dropoffTime: { type: String, default: "10:00 AM" },
   durationDays: { type: Number, default: 3 },
@@ -102,8 +131,8 @@ const bookingSchema = new mongoose.Schema({
 
   // สรุปราคา 
   pricing: {
-    pricePerDay: { type: Number, required: true },       
-    rentalTotal: { type: Number, required: true },       
+    pricePerDay: { type: Number, default: 2500 },       
+    rentalTotal: { type: Number, default: 7500 },       
     serviceFee: { type: Number, default: 0 },
     taxVat: { type: Number, default: 0 },                
     totalPrice: { type: Number, required: true }         
@@ -130,7 +159,16 @@ const bookingSchema = new mongoose.Schema({
     enum: ['pending', 'confirmed', 'cancelled'], 
     default: 'confirmed' 
   }
-}, { timestamps: true });
+}, { 
+  timestamps: true,
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
+});
+
+// Virtual `id` for Booking
+bookingSchema.virtual('id').get(function () {
+  return this._id.toHexString();
+});
 
 // 3. EXPORT MODELS
 export const Car = mongoose.model('Car', carSchema);

@@ -14,17 +14,22 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET - ดึงข้อมูลรถรายคันตาม ID 
+// GET - ดึงข้อมูลรถรายคันตาม ID หรือ slug
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    let car = null;
 
-    // ตรวจสอบความถูกต้องของ MongoDB ObjectId
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: "Invalid Car ID format" });
+    // 1. ค้นหาด้วย MongoDB ObjectId หากมี format ถูกต้อง
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      car = await Car.findById(id);
     }
 
-    const car = await Car.findById(id);
+    // 2. หากหาไม่เจอหรือ ID ไม่ใช่ ObjectId ให้ค้นหาด้วย slug
+    if (!car) {
+      car = await Car.findOne({ slug: id });
+    }
+
     if (!car) {
       return res.status(404).json({ message: "Car not found" });
     }
@@ -45,20 +50,27 @@ router.post("/", async (req, res) => {
   }
 });
 
-// PATCH - อัปเดตข้อมูลรถ
+// PATCH - อัปเดตข้อมูลรถ (รองรับทั้ง ObjectId และ slug)
 router.patch("/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    let car = null;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: "Invalid Car ID format" });
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      car = await Car.findByIdAndUpdate(
+        id,
+        req.body,
+        { new: true, runValidators: true }
+      );
     }
 
-    const car = await Car.findByIdAndUpdate(
-      id,
-      req.body,
-      { new: true, runValidators: true } // runValidators ป้องกันข้อมูลผิดเงื่อนไข schema
-    );
+    if (!car) {
+      car = await Car.findOneAndUpdate(
+        { slug: id },
+        req.body,
+        { new: true, runValidators: true }
+      );
+    }
 
     if (!car) {
       return res.status(404).json({ message: "Car not found" });
@@ -70,16 +82,19 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-// DELETE - ลบข้อมูลรถ
+// DELETE - ลบข้อมูลรถ (รองรับทั้ง ObjectId และ slug)
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    let car = null;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: "Invalid Car ID format" });
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      car = await Car.findByIdAndDelete(id);
     }
 
-    const car = await Car.findByIdAndDelete(id);
+    if (!car) {
+      car = await Car.findOneAndDelete({ slug: id });
+    }
 
     if (!car) {
       return res.status(404).json({ message: "Car not found" });
