@@ -205,12 +205,16 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-// DELETE - ลบข้อมูลจังหวัด
-router.delete("/:id", async (req, res) => {
+// PUT - แทนที่ข้อมูลจังหวัดทั้งก้อน (Full Update / Replace)
+router.put("/:id", async (req, res) => {
   try {
-    const deleted = await Province.findOneAndDelete(getProvinceMatchQuery(req.params.id));
+    const updated = await Province.findOneAndUpdate(
+      getProvinceMatchQuery(req.params.id),
+      { $set: req.body },
+      { new: true, runValidators: true }
+    );
 
-    if (!deleted) {
+    if (!updated) {
       return res.status(404).json({
         success: false,
         message: "Province not found",
@@ -219,7 +223,45 @@ router.delete("/:id", async (req, res) => {
 
     res.json({
       success: true,
-      message: "Province deleted successfully",
+      message: `แทนที่ข้อมูลจังหวัด "${updated.name_th || updated.name}" (PUT) สำเร็จ`,
+      province: updated,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+});
+
+// DELETE - ลบข้อมูลจังหวัด (พร้อม Master Data Protection)
+router.delete("/:id", async (req, res) => {
+  try {
+    const province = await Province.findOne(getProvinceMatchQuery(req.params.id));
+
+    if (!province) {
+      return res.status(404).json({
+        success: false,
+        message: "Province not found",
+      });
+    }
+
+    // 🛡️ Master Data Protection Guard: คุ้มครองจังหวัดหลัก 77 จังหวัด
+    const isMasterProvince = (province.id && province.id >= 1 && province.id <= 77) || province.isProtected !== false;
+    if (isMasterProvince && req.query.force !== "true") {
+      return res.status(403).json({
+        success: false,
+        isProtected: true,
+        message: `🛡️ ปฏิเสธการลบ: จังหวัด "${province.name_th || province.slug}" เป็นข้อมูลหลัก (Master Data 77 จังหวัด) ของระบบ ไม่อนุญาตให้ Hard Delete`,
+        protectionNotice: "ระบบแผนที่ SVG และการค้นหาอิงกับข้อมูล 77 จังหวัดหลัก หากต้องการลบข้อมูลทดสอบกรุณาระบุ ?force=true"
+      });
+    }
+
+    await Province.deleteOne({ _id: province._id });
+
+    res.json({
+      success: true,
+      message: `ลบข้อมูลจังหวัด "${province.name_th || province.slug}" สำเร็จ`,
     });
   } catch (error) {
     res.status(500).json({

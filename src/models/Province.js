@@ -36,6 +36,7 @@ const provinceSchema = new mongoose.Schema(
       height: { type: Number, default: 0 },
       d: { type: String, default: "" },
     },
+    isProtected: { type: Boolean, default: true },
   },
   {
     timestamps: true,
