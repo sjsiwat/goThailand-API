@@ -180,45 +180,45 @@
 
 ### 2.2 Booking Schema (`Booking`)
 
-Schema สำหรับเก็บประวัติการทำรายการจองรถเช่า (Checkout Flow):
+Schema สำหรับเก็บประวัติการทำรายการจองทั้งหมด (ทั้งรถเช่า ที่พัก ไกด์ และ Cart รวม):
 
 | ฟิลด์ (Field) | ชนิดข้อมูล (Type) | บังคับ (Required) | ค่าเริ่มต้น / ตัวอย่าง | รายละเอียด |
 | :--- | :--- | :---: | :--- | :--- |
-| `bookingReferenceId` | `String` | ❌ | Unique (Gen อัตโนมัติ `GT-CR-YYYY-XXXXX`) | รหัสอ้างอิงการจอง |
-| `carId` | `ObjectId` | ❌ | Ref: `'Car'` | อ้างอิงรหัสรถใน `Car` collection |
-| `carName` | `String` | ✅ | เช่น `"Toyota Fortuner"` | ชื่อรถที่ทำการจอง |
-| `carCategory` | `String` | ❌ | Default: `"SUV"` | ประเภทรถ |
-| `carImage` | `String` | ❌ | URL ภาพ | รูปหน้ารถ |
-| `carDetails` | `String` | ❌ | Default: `"SUV · 7 Seats · Diesel"` | สรุปสเปกแบบย่อ |
-| `carRating` | `String` | ❌ | Default: `"4.9"` | คะแนนรีวิวตอนจอง |
-| `pickupLocation` | `String` | ✅ | Default: `"Bangkok (BKK) Suvarnabhumi Airport"` | สถานที่รับรถ |
-| `dropoffLocation` | `String` | ✅ | Default: `"Bangkok (BKK) Suvarnabhumi Airport"` | สถานที่คืนรถ |
-| `pickupDate` | `Date` | ✅ | - | วันที่รับรถ |
-| `dropoffDate` | `Date` | ✅ | - | วันที่คืนรถ |
-| `pickupTime` | `String` | ❌ | Default: `"10:00 AM"` | เวลารับรถ |
-| `dropoffTime` | `String` | ❌ | Default: `"10:00 AM"` | เวลาคืนรถ |
-| `durationDays` | `Number` | ❌ | Default: `3` | จำนวนวันเช่า |
-| `datesSummary` | `String` | ❌ | เช่น `"Oct 15 - Oct 18 (3 Days)"` | ข้อความสรุปช่วงเวลาจอง |
-| `traveler` | `Object` | ✅ | `{ fullName, email, phone, country }` | ข้อมูลผู้ติดต่อหลัก |
-| `driver` | `Object` | ✅ | `{ fullName, phone, email, licenseCountry, driverAge, licenseNumber }` | ข้อมูลผู้ขับขี่และใบขับขี่ |
-| `specialRequests` | `String` | ❌ | - | คำขอเพิ่มเติม เช่น คาร์ซีทเด็ก |
-| `pricing` | `Object` | ✅ | `{ pricePerDay, rentalTotal, serviceFee, taxVat, totalPrice }` | รายละเอียดสรุปราคาและภาษี |
-| `payment` | `Object` | ❌ | `{ method: ['card','promptpay','bank'], cardName, cardNumberMasked, expiryDate, saveCardForFuture, sameAsTravelerAddress }` | ข้อมูลวิธีชำระเงิน |
+| `bookingReferenceId` | `String` | ❌ | Unique (Gen อัตโนมัติ `GT-CR-YYYY-XXXXX`, `GT-HT-YYYY-XXXXX`, `GT-GD-YYYY-XXXXX`, `GT-BK-YYYY-XXXXX`) | รหัสอ้างอิงการจอง |
+| `userId` | `Mixed` (ObjectId / String) | ❌ | Ref: `'User'` หรือ User ID string | เชื่อมโยงกับบัญชีผู้ใช้ผู้ทำการจอง |
+| `items` | `Array<Object>` | ❌ | Default: `[]` | รายการสินค้า/บริการที่จอง (Cart Items: `itemId`, `type`, `title`, `unitPrice`, `quantity`, `dates`, `itemTotal`) |
+| `serviceType` | `String` | ❌ | **Enum:** `'car'`, `'accommodation'`, `'guide'`, `'mixed'`, `'other'` | ประเภทบริการหลักของการจอง |
+| `bookingDate` | `Date` | ❌ | Default: `Date.now` | วันที่ทำรายการจอง |
+| `dates` | `Object` | ❌ | `{ startDate, endDate, durationDays, summary }` | ช่วงวันและจำนวนวันที่ใช้บริการ |
+| `traveler` | `Object` | ✅ | `{ fullName, email, phone, country }` | ข้อมูลผู้เดินทาง / ผู้ติดต่อหลัก |
+| `driver` | `Object` | ❌ | `{ fullName, phone, email, licenseCountry, driverAge, licenseNumber }` | ข้อมูลผู้ขับขี่และใบขับขี่ (กรณีบริการรถเช่า) |
+| `pickupLocation` | `String` | ❌ | เช่น `"Bangkok (BKK) Suvarnabhumi Airport"` | สถานที่รับรถ/จุดนัดพบ |
+| `dropoffLocation` | `String` | ❌ | เช่น `"Bangkok (BKK) Suvarnabhumi Airport"` | สถานที่คืนรถ |
+| `pickupDate` | `Date` | ❌ | - | วันที่รับรถ |
+| `dropoffDate` | `Date` | ❌ | - | วันที่คืนรถ |
+| `pricing` | `Object` | ✅ | `{ subtotal, pricePerDay, rentalTotal, serviceFee, taxVat, discount, totalPrice }` | รายละเอียดสรุปราคาและภาษี |
+| `totalPrice` | `Number` | ✅ | ยอดรวมสุทธิ (฿) | ราคารวมทั้งหมดของการจอง |
+| `payment` | `Object` | ❌ | `{ method: ['card','promptpay','bank','cash'], cardName, cardNumberMasked, expiryDate, saveCardForFuture, sameAsTravelerAddress, slipUrl }` | ข้อมูลวิธีชำระเงิน |
+| `billingAddress` | `Object` | ❌ | `{ sameAsTraveler, address }` | ที่อยู่สำหรับออกใบเสร็จ |
 | `termsAccepted` | `Boolean` | ✅ | Default: `true` | ยอมรับข้อกำหนดและเงื่อนไข |
-| `status` | `String` | ❌ | **Enum:** `'pending'`, `'confirmed'`, `'cancelled'` (Default: `'confirmed'`) | สถานะการจอง |
+| `status` | `String` | ❌ | **Enum:** `'pending'`, `'paid'`, `'confirmed'`, `'cancelled'` (Default: `'confirmed'`) | สถานะการจอง |
+| `paymentStatus` | `String` | ❌ | **Enum:** `'pending'`, `'paid'`, `'failed'`, `'refunded'` (Default: `'paid'`) | สถานะการชำระเงิน |
 
 #### Booking API Endpoints (`/api/bookings`)
 
 | Method | Endpoint | รายละเอียด |
 | :---: | :--- | :--- |
-| `GET` | `/api/bookings` | ดึงประวัติรายการจองทั้งหมด (เรียงจากล่าสุดไปเก่าสุด) |
+| `GET` | `/api/bookings` | ดึงประวัติรายการจองทั้งหมด (รองรับ Filter: `userId`, `status`, `serviceType`, `paymentStatus`) |
+| `GET` | `/api/bookings/user/:userId` | ดึงประวัติรายการจองทั้งหมดของผู้ใช้รายบุคคล |
 | `GET` | `/api/bookings/:id` | ค้นหารายการจองด้วย `_id` หรือ `bookingReferenceId` |
-| `POST` | `/api/bookings` | บันทึกรายการจองใหม่ (รองรับทั้ง Flat Payload จากฟอร์มหน้าเว็บ และ Nested Schema มาตรฐาน) |
-| `PATCH` | `/api/bookings/:id` | อัปเดตสถานะการจอง (`status: confirmed / cancelled / pending`) |
+| `POST` | `/api/bookings` | บันทึกรายการจองใหม่ลง MongoDB จริง (เชื่อมโยง `userId`, `items`, `dates`, `totalPrice`, `status: pending/paid/confirmed`) |
+| `PATCH` | `/api/bookings/:id` | อัปเดตสถานะการจอง (`status: pending / paid / confirmed / cancelled`) |
 | `DELETE` | `/api/bookings/:id` | ลบรายการจอง |
 
 > [!TIP]
-> **Payload Compatibility (Frontend -> Backend):** Endpoint `POST /api/bookings` รองรับ Flat Payload ตรงตามที่ Guitar ออกแบบไว้ในฟอร์ม Checkout (เช่น `fullName`, `email`, `driverName`, `licenseNumber`, `pickupReturn`, `rentalPrice` ฯลฯ) โดย Backend จะแปลงและแมปลง Subdocuments (`traveler`, `driver`, `pricing`, `payment`) ให้อัตโนมัติ พร้อมทั้งสร้างรหัสใบจอง `bookingReferenceId` ให้ทันที
+> **Payload Compatibility (Frontend -> Backend):** Endpoint `POST /api/bookings` รองรับทั้ง:
+> 1. Multi-service Cart Booking: ส่ง `items`, `userId`, `dates`, `totalPrice`, `status` จากหน้า `CheckoutPage.jsx`
+> 2. Flat Payload: รูปแบบเดิมของฟอร์มจองรถเช่า (`fullName`, `email`, `driverName`, `licenseNumber`, `pickupReturn`, `rentalPrice` ฯลฯ) โดย Backend จะแปลงและบันทึกลง Database อัตโนมัติ
 
 ### 2.3 ตัวอย่าง JSON ของ Car
 

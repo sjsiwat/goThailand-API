@@ -70,108 +70,11 @@ carSchema.virtual('gallery').get(function () {
 });
 
 
-// 2. BOOKING SCHEMA (สำหรับ Screen 9, Screen 10, และ Screen 11)
-const bookingSchema = new mongoose.Schema({
-  //  Booking Reference ID 
-  bookingReferenceId: { 
-    type: String, 
-    unique: true, 
-    default: () => `GT-CR-${new Date().getFullYear()}-${Math.floor(10000 + Math.random() * 90000)}` 
-  },
-
-  // ข้อมูลรถที่ถูกเลือก 
-  carId: { type: mongoose.Schema.Types.ObjectId, ref: 'Car' },
-  carName: { type: String, required: true },       
-  carCategory: { type: String, default: "SUV" },
-  carImage: { type: String },
-  carDetails: { type: String, default: "SUV · 7 Seats · Diesel" },
-  carRating: { type: String, default: "4.9" },
-
-  // ข้อมูลวัน-เวลาและสถานที่รับส่งรถ
-  pickupLocation: { 
-    type: String, 
-    required: true, 
-    default: "Bangkok (BKK) Suvarnabhumi Airport" 
-  },
-  dropoffLocation: { 
-    type: String, 
-    required: true, 
-    default: "Bangkok (BKK) Suvarnabhumi Airport" 
-  },
-  pickupDate: { type: Date, default: Date.now },
-  dropoffDate: { 
-    type: Date, 
-    default: () => new Date(Date.now() + 3 * 24 * 60 * 60 * 1000) 
-  },
-  pickupTime: { type: String, default: "10:00 AM" },
-  dropoffTime: { type: String, default: "10:00 AM" },
-  durationDays: { type: Number, default: 3 },
-  datesSummary: { type: String, default: "Oct 15, 10:00 AM - Oct 18, 10:00 AM (3 Days)" },
-
-  // Traveler Info
-  traveler: {
-    fullName: { type: String, required: true },
-    email: { type: String, required: true },
-    phone: { type: String, required: true },
-    country: { type: String, default: "United States" }
-  },
-
-  // Driver Info
-  driver: {
-    fullName: { type: String, required: true },
-    phone: { type: String },
-    email: { type: String },
-    licenseCountry: { type: String, default: "United States" },
-    driverAge: { type: mongoose.Schema.Types.Mixed, required: true },
-    licenseNumber: { type: String, required: true }
-  },
-
-  // Special Requests 
-  specialRequests: { type: String },
-
-  // สรุปราคา 
-  pricing: {
-    pricePerDay: { type: Number, default: 2500 },       
-    rentalTotal: { type: Number, default: 7500 },       
-    serviceFee: { type: Number, default: 0 },
-    taxVat: { type: Number, default: 0 },                
-    totalPrice: { type: Number, required: true }         
-  },
-
-  // Payment & Billing Address 
-  payment: {
-    method: { 
-      type: String, 
-      enum: ['card', 'promptpay', 'bank'], 
-      default: 'card' 
-    },
-    cardName: { type: String },
-    cardNumberMasked: { type: String },
-    expiryDate: { type: String },
-    saveCardForFuture: { type: Boolean, default: false },
-    sameAsTravelerAddress: { type: Boolean, default: true }
-  },
-
-  // เงื่อนไขและสถานะการจอง 
-  termsAccepted: { type: Boolean, required: true, default: true },
-  status: { 
-    type: String, 
-    enum: ['pending', 'confirmed', 'cancelled'], 
-    default: 'confirmed' 
-  }
-}, { 
-  timestamps: true,
-  toJSON: { virtuals: true },
-  toObject: { virtuals: true }
-});
-
-// Virtual `id` for Booking
-bookingSchema.virtual('id').get(function () {
-  return this._id.toHexString();
-});
+// 2. RE-EXPORT BOOKING MODEL
+import Booking from "./Booking.js";
 
 // 3. EXPORT MODELS
 export const Car = mongoose.model('Car', carSchema);
-export const Booking = mongoose.model('Booking', bookingSchema);
+export { Booking };
 
 export default Car;
