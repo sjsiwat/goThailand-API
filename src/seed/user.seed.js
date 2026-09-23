@@ -1,7 +1,8 @@
 import User from "../models/User.js";
 
-const defaultPassword = "$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW"; // Hashed "Password123!"
+const defaultPassword = "$2b$10$EzlHjtx6gYYEtnD7nmZcHurzJhRMclWEnE0yeJyva1y3gg1qS.PI6"; // Hashed "Password123!"
 const testPassword = "$2b$10$xURRwVmnhnlMqrkWZr0yVuAEgKbBXnDPwx6QzUWRTGmVq2MXnqEGa"; // Hashed "test123456"
+
 
 const users = [
   {
