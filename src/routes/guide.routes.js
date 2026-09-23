@@ -14,10 +14,10 @@ router.post("/", async (req, res) => {
   }
 });
 
-// 2. READ: ดึงรายการไกด์ทั้งหมด (รองรับ filter ตาม province, status, search)
+// 2. READ: ดึงรายการไกด์ทั้งหมด (รองรับ filter ตาม province, status, search, visibility, isActive)
 router.get("/", async (req, res) => {
   try {
-    const { province, status, search } = req.query;
+    const { province, status, search, visibility, isActive } = req.query;
     const filter = {};
 
     if (province) {
@@ -32,6 +32,11 @@ router.get("/", async (req, res) => {
         { nickname: { $regex: new RegExp(search, "i") } },
         { province: { $regex: new RegExp(search, "i") } }
       ];
+    }
+    if (visibility === "hidden" || isActive === "false") {
+      filter.isActive = false;
+    } else if (visibility === "visible" || isActive === "true") {
+      filter.$or = [{ isActive: true }, { isActive: { $exists: false } }];
     }
 
     const guides = await Guide.find(filter);

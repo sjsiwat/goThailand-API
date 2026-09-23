@@ -54,6 +54,7 @@ const guideSchema = new mongoose.Schema({
   total_travelers: { type: Number, default: 0, min: 0 },
   description: { type: String },
   specialized_services: [specializedServiceSchema],
+  isActive: { type: Boolean, default: true },
 
 }, { 
   timestamps: true,

@@ -16,11 +16,37 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET - Read all
+// GET - Read all (รองรับ filter: region, province, search, status, visibility, isActive)
 router.get("/", async (req, res) => {
   try {
-    const accommodations = await Accommodation.find();
+    const { region, province, search, status, visibility, isActive } = req.query;
+    const filter = {};
 
+    if (region && region !== "all") {
+      filter.region = new RegExp(`^${region}$`, "i");
+    }
+    if (province) {
+      filter["location.city"] = new RegExp(province, "i");
+    }
+    if (search) {
+      filter.$or = [
+        { name: new RegExp(search, "i") },
+        { "location.city": new RegExp(search, "i") },
+        { category: new RegExp(search, "i") },
+      ];
+    }
+    if (status === "hidden" || visibility === "hidden" || isActive === "false") {
+      filter.isActive = false;
+    } else if (
+      status === "visible" ||
+      status === "active" ||
+      visibility === "visible" ||
+      isActive === "true"
+    ) {
+      filter.$or = [{ isActive: true }, { isActive: { $exists: false } }];
+    }
+
+    const accommodations = await Accommodation.find(filter);
     res.json(accommodations);
   } catch (error) {
     res.status(500).json({

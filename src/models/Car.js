@@ -40,7 +40,8 @@ const carSchema = new mongoose.Schema({
   
   // สถานที่และสถานะ
   availableLocations: [{ type: String }],               
-  isAvailable: { type: Boolean, default: true }
+  isAvailable: { type: Boolean, default: true },
+  isActive: { type: Boolean, default: true }
 }, { 
   timestamps: true,
   toJSON: { virtuals: true },

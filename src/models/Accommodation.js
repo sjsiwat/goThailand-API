@@ -79,6 +79,7 @@ const accommodationSchema = new mongoose.Schema(
     rooms: [roomSchema],
     pictures: [{ type: String }],
     policies: policiesSchema,
+    isActive: { type: Boolean, default: true },
   },
   {
     timestamps: true,

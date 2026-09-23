@@ -4,10 +4,37 @@ import {Car} from "../models/Car.js";
 
 const router = express.Router();
 
-// GET - ดึงรายการรถทั้งหมด 
+// GET - ดึงรายการรถทั้งหมด (รองรับ filter: category, location, search, status, visibility, isActive)
 router.get("/", async (req, res) => {
   try {
-    const cars = await Car.find();
+    const { category, location, search, status, visibility, isActive } = req.query;
+    const filter = {};
+
+    if (category && category !== "all") {
+      filter.category = new RegExp(`^${category}$`, "i");
+    }
+    if (location) {
+      filter.availableLocations = { $in: [new RegExp(location, "i")] };
+    }
+    if (search) {
+      filter.$or = [
+        { name: new RegExp(search, "i") },
+        { brand: new RegExp(search, "i") },
+        { model: new RegExp(search, "i") },
+      ];
+    }
+    if (status === "hidden" || visibility === "hidden" || isActive === "false") {
+      filter.isActive = false;
+    } else if (
+      status === "visible" ||
+      status === "active" ||
+      visibility === "visible" ||
+      isActive === "true"
+    ) {
+      filter.$or = [{ isActive: true }, { isActive: { $exists: false } }];
+    }
+
+    const cars = await Car.find(filter);
     res.json(cars);
   } catch (error) {
     res.status(500).json({ message: error.message });
