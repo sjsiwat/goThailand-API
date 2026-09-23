@@ -1,4 +1,5 @@
 import express from "express";
+import mongoose from "mongoose";
 import Accommodation from "../models/Accommodation.js";
 
 const router = express.Router();
@@ -55,14 +56,28 @@ router.get("/", async (req, res) => {
   }
 });
 
-// UPDATE - Update by ID
-router.patch("/:id", async (req, res) => {
+// Helper สำหรับค้นหา Accommodation จาก ID หลากหลายรูปแบบ (ObjectId, Number _id, String _id, หรือ slug id)
+async function findAccommodation(id) {
+  let acc = null;
+  if (mongoose.Types.ObjectId.isValid(id)) {
+    acc = await Accommodation.findById(id);
+  }
+  if (!acc && !isNaN(id)) {
+    acc = await Accommodation.findById(Number(id));
+  }
+  if (!acc) {
+    acc = await Accommodation.findById(id);
+  }
+  if (!acc) {
+    acc = await Accommodation.findOne({ id });
+  }
+  return acc;
+}
+
+// GET - Read by ID or slug
+router.get("/:id", async (req, res) => {
   try {
-    const accommodation = await Accommodation.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true },
-    );
+    const accommodation = await findAccommodation(req.params.id);
 
     if (!accommodation) {
       return res.status(404).json({
@@ -78,16 +93,41 @@ router.patch("/:id", async (req, res) => {
   }
 });
 
-// DELETE - Delete by ID
-router.delete("/:id", async (req, res) => {
+// UPDATE - Update by ID
+router.patch("/:id", async (req, res) => {
   try {
-    const accommodation = await Accommodation.findByIdAndDelete(req.params.id);
-
-    if (!accommodation) {
+    const target = await findAccommodation(req.params.id);
+    if (!target) {
       return res.status(404).json({
         message: "Accommodation not found",
       });
     }
+
+    const updated = await Accommodation.findByIdAndUpdate(
+      target._id,
+      req.body,
+      { new: true, returnDocument: "after" }
+    );
+
+    res.json(updated);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+});
+
+// DELETE - Delete by ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const target = await findAccommodation(req.params.id);
+    if (!target) {
+      return res.status(404).json({
+        message: "Accommodation not found",
+      });
+    }
+
+    await Accommodation.findByIdAndDelete(target._id);
 
     res.json({
       message: "Accommodation deleted successfully",
@@ -100,3 +140,5 @@ router.delete("/:id", async (req, res) => {
 });
 
 export default router;
+
+

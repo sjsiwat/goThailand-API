@@ -13,6 +13,7 @@ https://gothailand-api.onrender.com
 ## Routes API
 
 ```
+https://gothailand-api.onrender.com/api/auth
 https://gothailand-api.onrender.com/api/accommodations
 https://gothailand-api.onrender.com/api/cars
 https://gothailand-api.onrender.com/api/bookings
@@ -23,12 +24,14 @@ https://gothailand-api.onrender.com/api/users
 
 Backend นี้ใช้สำหรับจัดการข้อมูลของ:
 
+- 🔐 Authentication & Session (ระบบล็อกอิน/สมัครสมาชิก/ตรวจโทเคน)
 - 🏨 Accommodation
 - 🚗 Car
 - 📑 Booking (การจองและคำสั่งซื้อ)
 - 🗺️ Province
 - 🧑‍🏫 Guide
 - 👤 User
+
 
 ---
 
@@ -314,6 +317,13 @@ PATCH  /api/guides/:id
 DELETE /api/guides/:id
 ```
 
+**Authentication**
+```
+POST   /api/auth/register   # สมัครสมาชิกใหม่ (hash รหัสผ่านด้วย bcrypt + ออก token อายุ 1 วัน)
+POST   /api/auth/login      # เข้าสู่ระบบ (ตรวจสอบรหัสผ่านด้วย bcrypt.compare + ออก token อายุ 1 วัน)
+GET    /api/auth/me         # ดึงข้อมูลผู้ใช้ปัจจุบัน (ต้องส่ง Header: Authorization: Bearer <token>)
+```
+
 **User**
 
 ```
@@ -322,6 +332,7 @@ GET    /api/users
 PATCH  /api/users/:id
 DELETE /api/users/:id
 ```
+
 
 ---
 

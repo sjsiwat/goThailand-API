@@ -9,6 +9,7 @@ import guideRoutes from "./routes/guide.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import provinceRoutes from "./routes/province.routes.js";
 import bookingRoutes from "./routes/booking.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 
 dotenv.config({ quiet: true });
 
@@ -18,6 +19,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/images", express.static("public/images"));
 
+app.use("/api/auth", authRoutes);
 app.use("/api/accommodations", accommodationRoutes);
 app.use("/api/cars", carRoutes);
 app.use("/api/guides", guideRoutes);
