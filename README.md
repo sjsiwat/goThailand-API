@@ -51,12 +51,14 @@ Backend นี้ใช้สำหรับจัดการข้อมูล
 
 โปรเจกต์นี้ใช้:
 
-- **Node.js** — Runtime สำหรับรัน JavaScript ฝั่ง Backend
-- **Express.js** — สร้าง REST API
-- **MongoDB** — Database
-- **Mongoose** — เชื่อม Node.js กับ MongoDB
-- **CORS** — อนุญาตให้ Frontend เรียก Backend
-- **dotenv** — อ่านค่าจาก `.env`
+- **Node.js** — Runtime สำหรับรัน JavaScript ฝั่ง Backend (ES Modules)
+- **Express.js** — เฟรมเวิร์กสร้าง REST API
+- **MongoDB Atlas** — ฐานข้อมูล NoSQL Cloud Database
+- **Mongoose** — ODM เชื่อมต่อและจัดการ Schema ข้อมูลระหว่าง Node.js กับ MongoDB
+- **bcryptjs** — เข้ารหัส (Hashing) และตรวจสอบรหัสผ่านอย่างปลอดภัยด้วย Salt Rounds
+- **jsonwebtoken (JWT)** — สร้างและตรวจสอบ Token ยืนยันตัวตน (Authentication & Authorization)
+- **CORS** — จัดการ Cross-Origin Resource Sharing อนุญาตให้ Frontend เชื่อมต่อได้
+- **dotenv** — จัดการ Environment Variables จากไฟล์ `.env`
 
 ---
 
@@ -66,60 +68,51 @@ Backend นี้ใช้สำหรับจัดการข้อมูล
 Team8-Backend/
 │
 ├── src/
-│   ├── server.js
+│   ├── server.js               # Entry point หลัก เริ่มการทำงานของ Express, Middlewares, Routes และ Database
 │   │
 │   ├── config/
-│   │   └── db.js
+│   │   └── db.js               # ฟังก์ชันเชื่อมต่อ MongoDB Atlas ผ่าน Mongoose
+│   │
+│   ├── middleware/
+│   │   └── auth.middleware.js  # Middlewares ความปลอดภัย (verifyToken, isAdmin)
 │   │
 │   ├── models/
-│   │   ├── Accommodation.js
-│   │   ├── Car.js
-│   │   ├── Guide.js
-│   │   └── User.js
+│   │   ├── Accommodation.js    # Schema: ที่พัก / โรงแรม / รีสอร์ท
+│   │   ├── Booking.js          # Schema: ข้อมูลการจอง คำสั่งซื้อ และสถานะการชำระเงิน
+│   │   ├── Car.js              # Schema: ข้อมูลรถเช่า
+│   │   ├── Guide.js            # Schema: ข้อมูลไกด์นำเที่ยว
+│   │   ├── Province.js         # Schema: ข้อมูล 77 จังหวัดทั่วไทย พร้อมคำขวัญและภูมิภาค
+│   │   └── User.js             # Schema: ผู้ใช้งาน ข้อมูลบัญชี และ Role (admin/user)
 │   │
-│   └── routes/
-│       ├── accommodation.routes.js
-│       ├── car.routes.js
-│       ├── guide.routes.js
-│       └── user.routes.js
+│   ├── routes/
+│   │   ├── accommodation.routes.js # API จัดการข้อมูลที่พัก (รองรับ Search & Filter)
+│   │   ├── auth.routes.js          # API สมัครสมาชิก, ล็อกอิน, ตรวจสอบ Session (JWT)
+│   │   ├── booking.routes.js       # API จัดการการจองและคำสั่งซื้อ
+│   │   ├── car.routes.js           # API จัดการข้อมูลรถเช่า
+│   │   ├── guide.routes.js         # API จัดการข้อมูลไกด์
+│   │   ├── province.routes.js      # API ดึงข้อมูล 77 จังหวัด (Filter ภูมิภาค / คำค้น)
+│   │   └── user.routes.js          # API จัดการผู้ใช้งาน (Protected Routes)
+│   │
+│   └── seed/                   # สคริปต์ Mock Data เริ่มต้นสำหรับระบบ
+│       ├── index.js            # รวมคำสั่ง Seed ทั้งหมด
+│       ├── user.seed.js        # Seed ข้อมูลผู้ใช้เริ่มต้นและ Test Account
+│       ├── province.seed.js    # Seed ข้อมูล 77 จังหวัดพร้อมคำขวัญ
+│       └── ...
 │
-├── .env
-├── .env.example
+├── .env                        # ไฟล์ Environment Variables (ห้าม commit)
+├── .env.example                # ตัวอย่างการตั้งค่า Environment Variables
 ├── .gitignore
 ├── package.json
 └── package-lock.json
 ```
 
-### หน้าที่ของแต่ละ Folder
+### หน้าที่ของแต่ละ Folder และไฟล์สำคัญ
 
-**`src/server.js`**
-เป็นไฟล์หลักของ Backend ทำหน้าที่:
-
-- สร้าง Express server
-- เปิด CORS
-- เปิด JSON parser
-- เชื่อม Routes
-- เชื่อม MongoDB
-- เปิด Port
-
-> ⚠️ ไม่ควรแก้ไฟล์นี้โดยไม่จำเป็น
-
-**`src/config/db.js`**
-ใช้สำหรับเชื่อมต่อ MongoDB — ไม่ต้องแก้ไฟล์นี้
-
-**`src/models/`**
-เก็บ Model ของแต่ละ resource เช่น
-
-```js
-const accommodationSchema = new mongoose.Schema({
-  name: String,
-  location: String,
-  price: Number,
-});
-```
-
-**`src/routes/`**
-เก็บ API Routes ของแต่ละ resource กำหนดว่า `GET` `POST` `PATCH` `DELETE` ทำงานอย่างไร
+- **`src/server.js`**: ไฟล์หลักของระบบ เริ่มต้น Express Server, เรียกใช้ CORS, JSON parser, Mount Routes ทั้งหมด และเชื่อมต่อ MongoDB
+- **`src/middleware/`**: ตัวกลางดักตรวจ Request ก่อนถึง Route Controllers เช่น การดักจับ Header Authorization, ตรวจสอบความถูกต้องและวันหมดอายุของ JWT Token, ตรวจสอบ Role Admin
+- **`src/models/`**: โครงสร้าง Schema และเงื่อนไขข้อมูล (Mongoose Schema)
+- **`src/routes/`**: กำหนด API Endpoints และ Controller Logic ประมวลผล Request/Response
+- **`src/seed/`**: สคริปต์สำหรับนำเข้าข้อมูลจำลอง (Mock Data) ลง Database สำหรับการพัฒนาและทดสอบระบบ
 
 ---
 
@@ -192,6 +185,7 @@ npm install
 ```env
 PORT=5001
 MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_super_secret_jwt_key
 ```
 
 ให้สร้าง `.env` จาก `.env.example`:
@@ -200,18 +194,23 @@ MONGO_URI=your_mongodb_connection_string
 cp .env.example .env
 ```
 
-จากนั้นเปิด `.env` แล้วใส่ค่า `MONGO_URI` ที่ได้รับจาก Team 8:
+จากนั้นเปิด `.env` แล้วกำหนดค่าให้ครบถ้วน:
 
 ```env
 PORT=5001
 MONGO_URI=mongodb+srv://...
+JWT_SECRET=gothailand_jwt_secret_key_2026_super_secure
 ```
+
+- **`PORT`**: พอร์ตสำหรับรัน Backend บนเครื่องตัวเอง (แนะนำ `5001`)
+- **`MONGO_URI`**: Connection String ของ MongoDB Atlas
+- **`JWT_SECRET`**: คีย์ลับสำหรับสร้างและเข้ารหัส Token (ห้ามเปิดเผย)
 
 > ⚠️ **สำคัญ**
 >
 > - ห้าม commit `.env` ขึ้น GitHub (`.env` ถูกใส่ไว้ใน `.gitignore` แล้ว)
 > - ห้ามทำ `git add .env`
-> - ห้ามส่ง MongoDB connection string ลง GitHub
+> - ห้ามส่ง MongoDB connection string หรือ JWT Secret ลง GitHub
 
 ---
 
@@ -304,8 +303,8 @@ DELETE /api/bookings/:id    # ลบหรือยกเลิกรายก�
 **Province** *(📖 [PROVINCE_API.md](./PROVINCE_API.md))*
 
 ```
-GET    /api/provinces       # ดึงรายการจังหวัดทั้งหมด (77 จังหวัด)
-GET    /api/provinces/:id   # ดึงข้อมูลจังหวัดตาม ID หรือชื่อ
+GET    /api/provinces       # ดึงรายการ 77 จังหวัด (รองรับ Query: ?region=... &search=... &q=... &format=summary)
+GET    /api/provinces/:id   # ดึงข้อมูลจังหวัดตาม _id หรือ id หรือชื่อจังหวัด (TH/EN) พร้อมคำขวัญ
 ```
 
 **Guide**
@@ -318,21 +317,214 @@ DELETE /api/guides/:id
 ```
 
 **Authentication**
+
 ```
 POST   /api/auth/register   # สมัครสมาชิกใหม่ (hash รหัสผ่านด้วย bcrypt + ออก token อายุ 1 วัน)
 POST   /api/auth/login      # เข้าสู่ระบบ (ตรวจสอบรหัสผ่านด้วย bcrypt.compare + ออก token อายุ 1 วัน)
 GET    /api/auth/me         # ดึงข้อมูลผู้ใช้ปัจจุบัน (ต้องส่ง Header: Authorization: Bearer <token>)
 ```
 
-**User**
+**User (Admin & Management — Protected Routes)**
 
 ```
-POST   /api/users
-GET    /api/users
-PATCH  /api/users/:id
-DELETE /api/users/:id
+GET    /api/users           # ดูรายชื่อผู้ใช้ทั้งหมด (ต้องมี Token, ซ่อน password hash)
+GET    /api/users/:id       # ดูข้อมูลผู้ใช้รายบุคคลตาม ID (ต้องมี Token, ซ่อน password hash)
+POST   /api/users           # สร้างผู้ใช้ใหม่ (รองรับการตั้ง Role: user / admin)
+PATCH  /api/users/:id       # แก้ไขข้อมูลผู้ใช้ (รองรับการเปลี่ยนรหัสผ่านโดย hash ใหม่อัตโนมัติ)
+DELETE /api/users/:id       # ลบผู้ใช้ออกจากระบบ
 ```
 
+---
+
+## 🔐 ระบบ Authentication & Security (ระบบยืนยันตัวตน)
+
+ระบบยืนยันตัวตนของ **GO-THAILAND** ใช้มาตรฐานความปลอดภัยระดับสากลด้วย **JWT (JSON Web Token)** ผสานกับ **bcryptjs** สำหรับการเข้ารหัสผ่านแบบ One-way Hashing
+
+### 📌 ภาพรวมสถาปัตยกรรม (Authentication Flow)
+
+```
+[ Frontend Client ]
+       │
+       │ 1. POST /api/auth/register หรือ login (email, password)
+       ▼
+[ Express Router ] ── (auth.routes.js)
+       │
+       │ 2. ตรวจสอบข้อมูล & bcrypt (hash หรือ compare)
+       ▼
+[ MongoDB Atlas ]
+       │
+       │ 3. ออก JWT Token (อายุ 1 วัน) พร้อม Payload { id, email, role }
+       ▼
+[ Frontend Client ] ── ได้รับ Token เก็บลงใน localStorage / Cookie
+       │
+       │ 4. Request ถัดไปแนบ Header: "Authorization: Bearer <token>"
+       ▼
+[ Middleware: verifyToken ] ── ตรวจสอบความถูกต้องและวันหมดอายุของ Token
+       │ ├── หากหมดอายุ -> คืนค่า 401 พร้อม { expired: true }
+       │ └── หากถูกต้อง -> แนบ decoded payload ไปที่ req.user แล้วไปต่อ next()
+       ▼
+[ Protected Route Controllers ] (เช่น GET /api/auth/me, /api/users, /api/bookings)
+```
+
+---
+
+### 1. การทำงานของ `POST /api/auth/register` (สมัครสมาชิก)
+
+- **ไฟล์ที่รับผิดชอบ:** `src/routes/auth.routes.js`
+- **ขั้นตอนการทำงาน:**
+  1. **รับข้อมูลจาก Body:** รับค่า `name` (หรือ `firstName` + `lastName`), `email`, `password`, `phone`, `role`
+  2. **Validation:** ตรวจสอบว่ากรอกข้อมูลจำเป็นครบถ้วนหรือไม่ หากไม่ครบจะตอบกลับ `400 Bad Request`
+  3. **ตรวจสอบอีเมลซ้ำ:** ค้นหาใน MongoDB (`User.findOne({ email })`) หากมีอีเมลนี้อยู่แล้ว จะตอบกลับ `400 อีเมลนี้ถูกลงทะเบียนไว้ในระบบแล้ว`
+  4. **เข้ารหัสรหัสผ่าน (Password Hashing):** ใช้ `bcrypt.hash(password, 10)` สร้าง Salt 10 รอบ เพื่อแปลงรหัสผ่านเป็น Hash string ที่ไม่สามารถแปลงกลับได้ ป้องกันข้อมูลรั่วไหล
+  5. **บันทึกลง Database:** สร้าง Document ผู้ใช้ใหม่ลงใน MongoDB Atlas โดยกำหนดสถานะเริ่มต้นเป็น `active`
+  6. **ออก JWT Token ทันที:** ใช้ `jwt.sign()` บรรจุ payload `{ id, email, role }` กำหนดอายุ **1 วัน (`expiresIn: "1d"`)**
+  7. **ตอบกลับผลลัพธ์:** ส่งข้อมูล User กลับไปให้ Frontend (โดย**ตัด field password ออก**) พร้อม JWT Token เพื่อให้ผู้ใช้สามารถเข้าใช้งานระบบได้ทันทีหลังสมัครเสร็จ
+
+**ตัวอย่าง Request Body:**
+```json
+{
+  "name": "Somchai Jaidee",
+  "email": "somchai@example.com",
+  "password": "Password123!",
+  "phone": "0812345678"
+}
+```
+
+**ตัวอย่าง Response (201 Created):**
+```json
+{
+  "success": true,
+  "message": "สมัครสมาชิกสำเร็จ",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "67...abc",
+    "name": "Somchai Jaidee",
+    "email": "somchai@example.com",
+    "phone": "0812345678",
+    "role": "user",
+    "status": "active"
+  }
+}
+```
+
+---
+
+### 2. การทำงานของ `POST /api/auth/login` (เข้าสู่ระบบ)
+
+- **ไฟล์ที่รับผิดชอบ:** `src/routes/auth.routes.js`
+- **ขั้นตอนการทำงาน:**
+  1. **รับข้อมูลจาก Body:** รับ `email` และ `password`
+  2. **ค้นหาผู้ใช้งาน:** ค้นหา Document ผู้ใช้จาก `cleanEmail` ในฐานข้อมูล
+  3. **ตรวจสอบรหัสผ่านด้วย `bcrypt.compare`:**
+     - นำรหัสผ่านข้อความธรรมดาที่ผู้ใช้กรอก มาเปรียบเทียบกับ Hash ที่จัดเก็บใน Database
+     - หาก**ไม่พบผู้ใช้** หรือ **รหัสผ่านไม่ตรงกัน** จะตอบกลับ `401 Unauthorized` ด้วยข้อความเดียวกันคือ `"อีเมลหรือรหัสผ่านไม่ถูกต้อง"` *(แนวปฏิบัติด้านความปลอดภัย: ไม่เปิดเผยว่าอีเมลหรือรหัสผ่านตัวใดที่ผิด เพื่อป้องกันการเดาผู้ใช้ของ Hacker)*
+  4. **สร้าง JWT Token:** เมื่อรหัสผ่านถูกต้อง ทำการ Sign Token อายุ 1 วัน (`expiresIn: "1d"`)
+  5. **ส่งผลลัพธ์:** ส่ง Token และข้อมูล User Profile กลับไปยัง Frontend
+
+**ตัวอย่าง Request Body:**
+```json
+{
+  "email": "siwat@example.com",
+  "password": "Password123!"
+}
+```
+
+**ตัวอย่าง Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "เข้าสู่ระบบสำเร็จ",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "6aae496cf3c07d4e040642c0",
+    "name": "Siwat",
+    "email": "siwat@example.com",
+    "role": "admin",
+    "status": "active"
+  }
+}
+```
+
+---
+
+### 3. การทำงานของ `GET /api/auth/me` (ตรวจสอบ Session ปัจจุบัน)
+
+- **ไฟล์ที่รับผิดชอบ:** `src/routes/auth.routes.js`
+- **จุดประสงค์:** ใช้เมื่อผู้ใช้เปิดเว็บหรือ Refresh หน้าเว็บ เพื่อให้ Frontend ตรวจสอบว่า Token ที่เก็บไว้ยังใช้งานได้อยู่หรือไม่ และดึงข้อมูลโปรไฟล์ล่าสุด
+- **Header ที่ต้องแนบ:**
+  ```
+  Authorization: Bearer <your_jwt_token>
+  ```
+- **ขั้นตอนการทำงาน:**
+  1. วิ่งผ่าน `verifyToken` middleware เพื่อถอดรหัสและตรวจความถูกต้องของ Token
+  2. ดึงข้อมูล User จาก Database ตาม `req.user.id` โดยใช้คำสั่ง `.select("-password")` เพื่อไม่ให้ hash รหัสผ่านหลุดออกไป
+  3. ส่งข้อมูลโปรไฟล์ล่าสุดของผู้ใช้กลับไป
+
+---
+
+## 🛡️ การทำงานของ Middleware (`src/middleware/auth.middleware.js`)
+
+Middleware ทำหน้าที่เป็นตัวกรองความปลอดภัย (Security Gatekeeper) ดักจับ Request ก่อนจะอนุญาตให้ Controller ทำงานต่อ
+
+### 1. `verifyToken` Middleware
+
+ทำหน้าที่ดักจับ Token และตรวจสอบตัวตนของผู้ใช้งานใน Protected Routes ทุกเส้นทาง
+
+```javascript
+import { verifyToken } from "../middleware/auth.middleware.js";
+
+// ใช้งานเป็น Middleware ก่อนเข้า Controller
+router.get("/me", verifyToken, async (req, res) => { ... });
+router.get("/users", verifyToken, async (req, res) => { ... });
+```
+
+**กลไกการทำงานอย่างละเอียด:**
+1. **ดักตรวจ Authorization Header:**
+   - ค้นหา Header `authorization` หรือ `Authorization`
+   - ตรวจสอบรูปแบบว่าต้องขึ้นต้นด้วย `"Bearer "` เท่านั้น
+   - หากไม่มี Header หรือไม่ได้ขึ้นต้นด้วย Bearer ระบบจะ Reject ทันทีด้วย `401 Unauthorized` (`"Access denied. No token provided."`)
+2. **สกัด Token ดิบ (Token Extraction):**
+   - แยก String ด้วยช่องว่าง: `authHeader.split(" ")[1]`
+3. **ตรวจสอบความถูกต้องด้วย `jwt.verify(token, secret)`:**
+   - ตรวจสอบ Signature ของ Token ด้วย Secret Key (`process.env.JWT_SECRET`)
+4. **ดักจับ Error สำคัญ (Error Handling):**
+   - **กรณี Token หมดอายุ (`TokenExpiredError`):** ส่งกลับ HTTP `401` พร้อมข้อความ `"Token has expired. Please login again."` และแนบ flag `"expired": true` เพื่อให้ Frontend ตรวจจับได้ง่ายและนำผู้ใช้ไปหน้า Login ทันที
+   - **กรณี Token ไม่ถูกต้องหรือถูกปลอมแปลง (`JsonWebTokenError`):** ส่งกลับ HTTP `401` `"Invalid token."`
+5. **ส่งต่อ Context ผ่าน `req.user`:**
+   - เมื่อตรวจสอบผ่าน ระบบจะแนบข้อมูลที่ Decode ได้ (`req.user = decoded`) ซึ่งประกอบด้วย `{ id, email, role }` ให้ Controller ถัดไปสามารถเรียกใช้ `req.user.id` หรือ `req.user.role` ได้ทันที แล้วเรียก `next()`
+
+---
+
+### 2. `isAdmin` Middleware (Role-Based Authorization)
+
+ทำหน้าที่จำกัดสิทธิ์เฉพาะผู้ใช้ที่มีสถานะเป็น **Admin** เท่านั้น
+
+```javascript
+import { verifyToken, isAdmin } from "../middleware/auth.middleware.js";
+
+// เฉพาะผู้ใช้ที่มีสิทธิ์ Admin เท่านั้นที่สามารถเข้าถึงได้
+router.delete("/users/:id", verifyToken, isAdmin, async (req, res) => { ... });
+```
+
+**กลไกการทำงาน:**
+1. ต้องรัน **ต่อจาก `verifyToken`** เสมอ เพื่อให้มี Object `req.user` ก่อน
+2. ตรวจสอบค่า `req.user.role === "admin"`
+3. หากเป็น Admin จะอนุญาตให้ทำงานต่อไป (`next()`)
+4. หากไม่ใช่ Admin จะปฏิเสธทันทีด้วย HTTP `403 Forbidden` พร้อมข้อความ:
+   ```json
+   {
+     "success": false,
+     "message": "Access denied. Admin privileges required."
+   }
+   ```
+
+---
+
+### 3. การรักษาความปลอดภัยของ User Data (`.select("-password")`)
+
+ใน Routes ที่มีการดึงข้อมูลผู้ใช้ เช่น `GET /api/users` หรือ `GET /api/users/:id`:
+- ระบบจะใช้คำสั่ง `.select("-password")` เสมอ เพื่อกรอง field password ออกจากการ Query
+- ป้องกันไม่ให้แฮชรหัสผ่านของผู้ใช้รั่วไหลออกสู่สาธารณะแม้กระทั่งทาง Response API
 
 ---
 
