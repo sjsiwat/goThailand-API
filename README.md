@@ -25,10 +25,22 @@ Backend นี้ใช้สำหรับจัดการข้อมูล
 
 - 🏨 Accommodation
 - 🚗 Car
-- 📑 Booking (การจองรถเช่า)
+- 📑 Booking (การจองและคำสั่งซื้อ)
 - 🗺️ Province
 - 🧑‍🏫 Guide
 - 👤 User
+
+---
+
+## 🔑 Test Account (ข้อมูลบัญชีสำหรับทดสอบระบบ)
+
+บัญชีสำหรับผู้ทดสอบระบบและผู้ตรวจงาน (Credentials for Testing):
+
+| บัญชี / บทบาท | Email (อีเมล) | Password (รหัสผ่าน) | หมายเหตุ |
+| :--- | :--- | :--- | :--- |
+| **Test User (บัญชีทดสอบ)** | `testgothailand`<br>*(หรือ `testgothailand@gmail.com`, `testgothailand@gothailand.com`)* | `test123456` | บัญชีผู้ใช้ทั่วไปสำหรับทดสอบระบบ (บันทึกลง MongoDB Atlas เรียบร้อย) |
+| **Admin (ผู้ดูแลระบบ)** | `siwat@example.com` | `Password123!` | บัญชีผู้ดูแลระบบ (Admin) |
+| **Demo Customer** | `john@example.com` | `Password123!` | บัญชีลูกค้าเดโม่เดิม |
 
 ---
 

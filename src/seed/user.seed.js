@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 
 const defaultPassword = "$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW"; // Hashed "Password123!"
+const testPassword = "$2b$10$xURRwVmnhnlMqrkWZr0yVuAEgKbBXnDPwx6QzUWRTGmVq2MXnqEGa"; // Hashed "test123456"
 
 const users = [
   {
@@ -36,6 +37,27 @@ const users = [
     email: "anna@example.com",
     password: defaultPassword,
     phone: "0956789012",
+    role: "user",
+  },
+  {
+    name: "Test GoThailand",
+    email: "testgothailand",
+    password: testPassword,
+    phone: "0812345678",
+    role: "user",
+  },
+  {
+    name: "Test GoThailand",
+    email: "testgothailand@gmail.com",
+    password: testPassword,
+    phone: "0812345678",
+    role: "user",
+  },
+  {
+    name: "Test GoThailand",
+    email: "testgothailand@gothailand.com",
+    password: testPassword,
+    phone: "0812345678",
     role: "user",
   },
 ];
